@@ -16,11 +16,12 @@ Flex.defaultProps = {
   direction: 'row',
   justify: 'center',
   alignItems: 'center',
-  alignContent: 'center'
+  alignContent: 'center',
+  height: '100vh'
 }
 
 Flex.propTypes = {
-  height: PropTypes.any,
+  height: PropTypes.string,
   flex: PropTypes.number,
   direction: PropTypes.oneOf(['row', 'column']),
   justify: PropTypes.oneOf(['flex-start', 'center', 'flex-end', 'space-between', 'space-around', 'space-evenly']),

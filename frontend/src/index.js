@@ -13,12 +13,12 @@ import theme from './app/theme'
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
-    <BrowserRouter>
+    <BrowserRouter basename='/'>
       <Suspense fallback={<Loading />}>
         <CssBaseline />
-          <App />
+        <App />
       </Suspense>
     </BrowserRouter>
   </MuiThemeProvider>, 
   document.getElementById('root')
-);
+)

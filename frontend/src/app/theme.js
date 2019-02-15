@@ -6,6 +6,7 @@ import indigo from '@material-ui/core/colors/indigo';
 const palette = {
   primary: lightBlue,
   secondary: indigo,
+  textPrimary: 'white'
 }
 
 const typography = {
