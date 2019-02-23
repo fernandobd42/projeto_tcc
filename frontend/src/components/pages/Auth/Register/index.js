@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
+import { Mutation } from "react-apollo"
 import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
+
+import SIGN_UP from './Mutation'
 
 import theme from 'app/theme'
 
 import InputField from 'components/atoms/InputField'
 import Flex from 'components/atoms/Flex'
+import Alert from 'components/atoms/Alert'
 
 import MuiPaper from '@material-ui/core/Paper'
 import MuiButton from '@material-ui/core/Button'
@@ -96,9 +100,30 @@ const validationSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], "Senhas devem ser iguais")
 })
 
-const submit = (values, actions) => {
-  console.log(values, actions)
-  actions.setSubmitting(false)
+const submit = (mutation, redirectToLogin) => async ({ email, password, name }, { setSubmitting }) => {
+  try {
+    await mutation({
+      variables:
+      {
+        email: email,
+        password: password,
+        name: name,
+      }
+    })
+
+    Alert('success', 'Sucesso', 'Cadastro realizado com sucesso!')
+    redirectToLogin()
+  } catch (error) {
+    if (!!error.networkError) {
+      Alert('error', 'Error', 'Servidor fora do ar!')
+    }
+
+    if (error.message.includes('User already exists')) {
+      Alert('error', 'Error!', 'Este email já está sendo usado')
+    }
+  }
+  
+  setSubmitting(false)
 }
 
 const handlingTypePassword = (typePassword, setTypePassword, setTooltipPassword) => {
@@ -130,63 +155,67 @@ const Register = ({ history }) => {
         <Header>
           <Title variant="h4">Cadastro</Title>
         </Header>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={submit}
-        > 
-        {({ onSubmit }) => (
-          <Form>
-            <FormFields>
-              <FormikField
-                required
-                name="name"
-                label="Name"
-                placeholder="Fulano de tal"
-                component={InputField}
-              />
-              <FormikField
-                required
-                name="email"
-                label="Email"
-                placeholder="email@gmail.com"
-                component={InputField}
-              />
-              <FormikField
-                required
-                name="password"
-                type={typePassword}
-                label="Senha"
-                placeholder="*********"
-                component={InputField}
-                endIcon={
-                  <MuiTooltip title={tooltipPassword} aria-label={tooltipPassword}>
-                    <MuiIconButton onClick={() => handlingTypePassword(typePassword, setTypePassword, setTooltipPassword)}>
-                      <LockIconComponent type={typePassword} />
-                    </MuiIconButton>
-                  </MuiTooltip>
-                }
-              />
-              <FormikField
-                required
-                name="repeatPassword"
-                type={typePassword}
-                label="Confirmar senha"
-                placeholder="*********"
-                component={InputField}
-              />
-            </FormFields>
-            <CustomButton variant="outlined" color="primary" onClick={onSubmit}>
-              Entrar
-            </CustomButton>
-            <Footer>
-              <CustomButton type="button" color="primary" onClick={() => redirectToLogin()}>
-                Login
+        <Mutation mutation={SIGN_UP}>
+          {(signup, { loading }) => (
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={submit(signup, redirectToLogin)}
+          > 
+          {({ onSubmit }) => (
+            <Form>
+              <FormFields>
+                <FormikField
+                  required
+                  name="name"
+                  label="Name"
+                  placeholder="Fulano de tal"
+                  component={InputField}
+                />
+                <FormikField
+                  required
+                  name="email"
+                  label="Email"
+                  placeholder="email@gmail.com"
+                  component={InputField}
+                />
+                <FormikField
+                  required
+                  name="password"
+                  type={typePassword}
+                  label="Senha"
+                  placeholder="*********"
+                  component={InputField}
+                  endIcon={
+                    <MuiTooltip title={tooltipPassword} aria-label={tooltipPassword}>
+                      <MuiIconButton onClick={() => handlingTypePassword(typePassword, setTypePassword, setTooltipPassword)}>
+                        <LockIconComponent type={typePassword} />
+                      </MuiIconButton>
+                    </MuiTooltip>
+                  }
+                />
+                <FormikField
+                  required
+                  name="repeatPassword"
+                  type={typePassword}
+                  label="Confirmar senha"
+                  placeholder="*********"
+                  component={InputField}
+                />
+              </FormFields>
+              <CustomButton type="submit" variant="outlined" color="primary" disabled={loading} onClick={onSubmit}>
+                Entrar
               </CustomButton>
-            </Footer>
-          </Form>
+              <Footer>
+                <CustomButton type="button" color="primary" onClick={() => redirectToLogin()}>
+                  Login
+                </CustomButton>
+              </Footer>
+            </Form>
+          )}
+          </Formik>
         )}
-        </Formik>
+        </Mutation>
       </Paper>
     </Flex>
   )

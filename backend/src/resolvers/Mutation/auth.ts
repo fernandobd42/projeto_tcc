@@ -4,6 +4,14 @@ import { Context } from '../../utils'
 
 export const auth = {
   async signup(parent, args, ctx: Context) {
+    const exists = await ctx.prisma.$exists.user({
+      email: args.email
+    })
+
+    if (exists) {
+      throw new Error('User already exists')
+    }
+
     const password = await bcrypt.hash(args.password, 10)
     const user = await ctx.prisma.createUser({ ...args, password })
 

@@ -7,6 +7,7 @@ import theme from 'app/theme'
 
 import InputField from 'components/atoms/InputField'
 import Flex from 'components/atoms/Flex'
+import Alert from 'components/atoms/Alert'
 
 import MuiPaper from '@material-ui/core/Paper'
 import MuiButton from '@material-ui/core/Button'
@@ -84,7 +85,9 @@ const validationSchema = Yup.object().shape({
 })
 
 const submit = (values, actions) => {
-  console.log(values, actions)
+  console.log('valuess ', values, actions)
+  Alert('success', 'Login realizado com sucesso!')
+  Alert('error', 'Email e/ou senha estão incorretos!')
   actions.setSubmitting(false)
 }
 
@@ -109,7 +112,7 @@ const LockIconComponent = ({ type }) => {
 
 const Login = ({ history }) => {
   const [typePassword, setTypePassword] = useState('password')
-    const [tooltipPassword, setTooltipPassword] = useState('Mostrar senha')
+  const [tooltipPassword, setTooltipPassword] = useState('Mostrar senha')
   const redirectToRegister = () => history.push('/auth/register')
 
   return (
@@ -149,7 +152,7 @@ const Login = ({ history }) => {
                 }
               />
             </FormFields>
-            <CustomButton variant="outlined" color="primary" onClick={onSubmit}>
+            <CustomButton type="submit" variant="outlined" color="primary" onClick={onSubmit}>
               Entrar
             </CustomButton>
             <Footer>
