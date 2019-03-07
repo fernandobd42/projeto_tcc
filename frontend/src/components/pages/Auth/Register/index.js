@@ -105,9 +105,9 @@ const submit = (mutation, redirectToLogin) => async ({ email, password, name }, 
     await mutation({
       variables:
       {
-        email: email,
-        password: password,
-        name: name,
+        email,
+        password,
+        name,
       }
     })
 
@@ -119,7 +119,7 @@ const submit = (mutation, redirectToLogin) => async ({ email, password, name }, 
     }
 
     if (error.message.includes('User already exists')) {
-      Alert('error', 'Error!', 'Este email já está sendo usado')
+      Alert('error', 'Error!', 'Este email já está sendo usado.')
     }
   }
   
