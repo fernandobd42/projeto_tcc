@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { Mutation } from 'react-apollo'
 import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
+
+import { ContextAPI, setToken } from 'app/store'
+
+import LOGIN from './Mutation'
 
 import theme from 'app/theme'
 
@@ -84,11 +89,33 @@ const validationSchema = Yup.object().shape({
     .min(8, 'Senha deve ter no mínimo 8 caracteres')
 })
 
-const submit = (values, actions) => {
-  console.log('valuess ', values, actions)
-  Alert('success', 'Login realizado com sucesso!')
-  Alert('error', 'Email e/ou senha estão incorretos!')
-  actions.setSubmitting(false)
+const submit = (mutation, redirectToHome, setUser) => async ({ email, password }, { setSubmitting }) => {
+  try {
+    const { data } = await mutation({
+      variables: 
+      {
+        email,
+        password
+      }
+    })
+
+    const result = data.login
+
+    setUser(result.user)
+    setToken(result.token)
+    Alert('success', 'Sucesso', 'Login realizado com sucesso!')
+    redirectToHome()
+  } catch (error) {
+    if (error.message.includes('No such user found for email')) {
+      Alert('error', 'Error', 'Email não cadastrado!')
+    }
+
+    if (error.message.includes('Invalid password')) {
+      Alert('error', 'Error', 'Senha incorreta, tente novamente com outra senha.')
+    }
+  }
+
+  setSubmitting(false)
 }
 
 const handlingTypePassword = (typePassword, setTypePassword, setTooltipPassword) => {
@@ -113,7 +140,9 @@ const LockIconComponent = ({ type }) => {
 const Login = ({ history }) => {
   const [typePassword, setTypePassword] = useState('password')
   const [tooltipPassword, setTooltipPassword] = useState('Mostrar senha')
+  const [, setUser] = useContext(ContextAPI)
   const redirectToRegister = () => history.push('/auth/register')
+  const redirectToHome = () => history.push('/admin/home')
 
   return (
     <Flex>
@@ -121,48 +150,52 @@ const Login = ({ history }) => {
         <Header>
           <Title variant="h4">Login</Title>
         </Header>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={submit}
-        > 
-        {({ onSubmit }) => (
-          <Form>
-            <FormFields>
-              <FormikField
-                required
-                name="email"
-                label="Email"
-                placeholder="email@gmail.com"
-                component={InputField}
-              />
-              <FormikField
-                required
-                name="password"
-                type={typePassword}
-                label="Senha"
-                placeholder="*********"
-                component={InputField}
-                endIcon={
-                  <MuiTooltip title={tooltipPassword} aria-label={tooltipPassword}>
-                    <MuiIconButton onClick={() => handlingTypePassword(typePassword, setTypePassword, setTooltipPassword)}>
-                      <LockIconComponent type={typePassword} />
-                    </MuiIconButton>
-                  </MuiTooltip>
-                }
-              />
-            </FormFields>
-            <CustomButton type="submit" variant="outlined" color="primary" onClick={onSubmit}>
-              Entrar
-            </CustomButton>
-            <Footer>
-              <CustomButton type="button" color="primary" onClick={() => redirectToRegister()}>
-                Cadastrar
+        <Mutation mutation={LOGIN}>
+          {(signin, { loading }) => (
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={submit(signin, redirectToHome, setUser)}
+          > 
+          {({ onSubmit }) => (
+            <Form>
+              <FormFields>
+                <FormikField
+                  required
+                  name="email"
+                  label="Email"
+                  placeholder="email@gmail.com"
+                  component={InputField}
+                />
+                <FormikField
+                  required
+                  name="password"
+                  type={typePassword}
+                  label="Senha"
+                  placeholder="*********"
+                  component={InputField}
+                  endIcon={
+                    <MuiTooltip title={tooltipPassword} aria-label={tooltipPassword}>
+                      <MuiIconButton onClick={() => handlingTypePassword(typePassword, setTypePassword, setTooltipPassword)}>
+                        <LockIconComponent type={typePassword} />
+                      </MuiIconButton>
+                    </MuiTooltip>
+                  }
+                />
+              </FormFields>
+              <CustomButton type="submit" variant="outlined" color="primary" disabled={loading} onClick={onSubmit}>
+                Entrar
               </CustomButton>
-            </Footer>
-          </Form>
+              <Footer>
+                <CustomButton type="button" color="primary" onClick={() => redirectToRegister()}>
+                  Cadastrar
+                </CustomButton>
+              </Footer>
+            </Form>
+          )}
+          </Formik>
         )}
-        </Formik>
+        </Mutation>
       </Paper>
     </Flex>
   )
