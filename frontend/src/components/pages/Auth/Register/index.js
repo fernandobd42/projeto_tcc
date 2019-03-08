@@ -45,7 +45,7 @@ const Header = styled(MuiPaper)`
 
 const Title = styled(MuiTypography)`
   && {
-    color ${theme.palette.textPrimary}
+    color: ${theme.palette.textPrimary};
   }
 `
 
