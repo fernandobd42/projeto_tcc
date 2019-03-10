@@ -28,6 +28,17 @@ export const post = {
     })
   },
 
+  async updatePost(parent, { id, title, content, published }, ctx: Context, info) {
+    return ctx.prisma.updatePost({
+      where: { id },
+      data: {
+        title,
+        content,
+        published,
+      }
+    })
+  },
+
   async deletePost(parent, { id }, ctx: Context, info) {
     const userId = getUserId(ctx)
     const postExists = await ctx.prisma.$exists.post({

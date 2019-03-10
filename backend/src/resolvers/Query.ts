@@ -1,7 +1,7 @@
 import { getUserId, Context } from '../utils'
 
 export const Query = {
-  feed(parent, args, ctx: Context) {
+  posts(parent, args, ctx: Context) {
     return ctx.prisma.posts({ where: { published: true } })
   },
 
