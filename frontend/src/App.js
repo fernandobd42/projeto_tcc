@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react'
 import { Switch, Route, Redirect} from 'react-router-dom'
 
 import apolloClient from 'app/apolloClient'
@@ -34,7 +34,6 @@ const App = () => {
       <Route component={NotFoundPage} />
     </Switch>
   )
-  
 }
 
 export default App

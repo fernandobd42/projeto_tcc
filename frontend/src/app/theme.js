@@ -1,7 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
-import lightBlue from '@material-ui/core/colors/lightBlue';
-import indigo from '@material-ui/core/colors/indigo';
+import lightBlue from '@material-ui/core/colors/lightBlue'
+import indigo from '@material-ui/core/colors/indigo'
 
 const palette = {
   primary: lightBlue,
@@ -21,6 +21,6 @@ const typography = {
 const theme = createMuiTheme({
   palette,
   typography
-});
+})
 
 export default theme

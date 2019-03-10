@@ -5,7 +5,7 @@ export const setToken = token => localStorage.setItem('TCC__TOKEN', token)
 export const getToken = () => localStorage.getItem('TCC__TOKEN')
 
 const StoreProvider = props => {
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState(undefined)
 
   return (
     <ContextAPI.Provider value={[user, setUser]}>

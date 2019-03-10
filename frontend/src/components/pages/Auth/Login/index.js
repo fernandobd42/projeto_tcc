@@ -16,7 +16,7 @@ import Alert from 'components/atoms/Alert'
 
 import MuiPaper from '@material-ui/core/Paper'
 import MuiButton from '@material-ui/core/Button'
-import MuiTypography from '@material-ui/core/Typography';
+import MuiTypography from '@material-ui/core/Typography'
 import MuiIconButton from '@material-ui/core/IconButton'
 import MuiTooltip from '@material-ui/core/Tooltip'
 import MuiIconLock from '@material-ui/icons/Lock'
