@@ -24,7 +24,7 @@ Flex.propTypes = {
   height: PropTypes.string,
   flex: PropTypes.number,
   direction: PropTypes.oneOf(['row', 'column']),
-  justify: PropTypes.oneOf(['flex-start', 'center', 'flex-end', 'space-between', 'space-around', 'space-evenly']),
+  justify: PropTypes.oneOf(['start', 'flex-start', 'center', 'flex-end', 'space-between', 'space-around', 'space-evenly']),
   alignItems: PropTypes.oneOf(['flex-start', 'center', 'flex-end', 'stretch', 'baseline']),
   alignContent: PropTypes.oneOf(['stretch', 'center', 'flex-start', 'flex-end', 'space-between', 'space-around'])
 }

@@ -18,9 +18,12 @@ const typography = {
   fontWeightMedium: 500
 }
 
+const direction = 'ltr'
+
 const theme = createMuiTheme({
   palette,
-  typography
+  typography,
+  direction
 })
 
 export default theme
