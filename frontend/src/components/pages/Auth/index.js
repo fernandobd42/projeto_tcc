@@ -12,7 +12,6 @@ const Auth = ({ history }) => {
   const [user] = useContext(ContextAPI)
   const redirectToAdmin = () => history.push('/admin')
 
-  console.log(user)
   if (!!user) {
     redirectToAdmin()
   }
