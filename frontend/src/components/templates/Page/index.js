@@ -16,6 +16,10 @@ const Content = styled.main`
   padding: ${theme.spacing.unit * 7}px;
   height: 100vh;
   overflow: auto;
+
+  @media (max-width: 700px) {
+    padding: ${theme.spacing.unit * 4}px;
+  }
 `
 
 const Page = ({ header, sidebar, children, ...props }) => {
