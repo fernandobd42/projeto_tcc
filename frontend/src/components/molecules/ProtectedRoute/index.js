@@ -9,7 +9,7 @@ const ProtectedRoute = ({ component: Component }) => {
   return (
     <Route render={props =>
       !user
-        ? <Redirect to="/auth/login" />
+        ? <Redirect to='/auth/login' />
         : <Component {...props} />
       }
     />

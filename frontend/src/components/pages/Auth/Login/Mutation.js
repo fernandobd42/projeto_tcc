@@ -1,4 +1,4 @@
-import gql from "graphql-tag"
+import gql from 'graphql-tag'
 
 const LOGIN = gql`
   mutation signup($email: String!, $password: String!) {

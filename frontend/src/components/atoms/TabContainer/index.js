@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import MuiTypography from '@material-ui/core/Typography'
 
 const TabContainer = ({ children, dir }) => (
-  <MuiTypography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+  <MuiTypography component='div' dir={dir} style={{ padding: 8 * 3 }}>
     {children}
   </MuiTypography>
 )

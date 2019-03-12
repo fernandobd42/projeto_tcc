@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Mutation } from "react-apollo"
+import { Mutation } from 'react-apollo'
 import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
@@ -97,7 +97,7 @@ const validationSchema = Yup.object().shape({
     .min(8, 'Senha deve ter no mínimo 8 caracteres'),
   repeatPassword: Yup.string()
     .required('Confirmar senha é obrigatório')
-    .oneOf([Yup.ref('password'), null], "Senhas devem ser iguais")
+    .oneOf([Yup.ref('password'), null], 'Senhas devem ser iguais')
 })
 
 const submit = (mutation, redirectToLogin) => async ({ email, password, name }, { setSubmitting }) => {
@@ -153,7 +153,7 @@ const Register = ({ history }) => {
     <Flex>
       <Paper>
         <Header>
-          <Title variant="h4">Cadastro</Title>
+          <Title variant='h4'>Cadastro</Title>
         </Header>
         <Mutation mutation={SIGN_UP}>
           {(signup, { loading }) => (
@@ -167,24 +167,24 @@ const Register = ({ history }) => {
               <FormFields>
                 <FormikField
                   required
-                  name="name"
-                  label="Name"
-                  placeholder="Fulano de tal"
+                  name='name'
+                  label='Name'
+                  placeholder='Fulano de tal'
                   component={InputField}
                 />
                 <FormikField
                   required
-                  name="email"
-                  label="Email"
-                  placeholder="email@gmail.com"
+                  name='email'
+                  label='Email'
+                  placeholder='email@gmail.com'
                   component={InputField}
                 />
                 <FormikField
                   required
-                  name="password"
+                  name='password'
                   type={typePassword}
-                  label="Senha"
-                  placeholder="*********"
+                  label='Senha'
+                  placeholder='*********'
                   component={InputField}
                   endIcon={
                     <MuiTooltip title={tooltipPassword} aria-label={tooltipPassword}>
@@ -196,18 +196,18 @@ const Register = ({ history }) => {
                 />
                 <FormikField
                   required
-                  name="repeatPassword"
+                  name='repeatPassword'
                   type={typePassword}
-                  label="Confirmar senha"
-                  placeholder="*********"
+                  label='Confirmar senha'
+                  placeholder='*********'
                   component={InputField}
                 />
               </FormFields>
-              <CustomButton type="submit" variant="outlined" color="primary" disabled={loading} onClick={onSubmit}>
+              <CustomButton type='submit' variant='outlined' color='primary' disabled={loading} onClick={onSubmit}>
                 Entrar
               </CustomButton>
               <Footer>
-                <CustomButton type="button" color="primary" onClick={() => redirectToLogin()}>
+                <CustomButton type='button' color='primary' onClick={() => redirectToLogin()}>
                   Login
                 </CustomButton>
               </Footer>

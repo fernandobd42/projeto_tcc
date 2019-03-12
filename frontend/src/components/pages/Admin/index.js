@@ -13,8 +13,8 @@ const NotFoundPage = React.lazy(() => import('components/pages/NotFound'))
 const Admin = () => (
   <Page header={<AppBar />}>
     <Switch>
-      <ProtectedRoute path="/admin/home" exact component={HomePage} />
-      <Route path="/admin" exact render={() => <Redirect to="/admin/home" />} />
+      <ProtectedRoute path='/admin/home' exact component={HomePage} />
+      <Route path='/admin' exact render={() => <Redirect to='/admin/home' />} />
       <Route component={NotFoundPage} />
     </Switch>
   </Page>

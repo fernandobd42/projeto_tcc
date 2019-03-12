@@ -71,7 +71,7 @@ const DropdownMenu = ({ history }) => {
       onClick={profileToggle(openMenu, setOpenMenu)} 
       buttonRef={setProfileAnchorEl}
     >
-      <UserName variant="subtitle1">
+      <UserName variant='subtitle1'>
         {!!user && user.name.split(' ')[0]}
       </UserName>
       <UserIcon />

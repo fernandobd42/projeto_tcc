@@ -25,16 +25,16 @@ const Tabs = () => {
 
   return (
     <>
-      <MuiAppBar position="static" color="default">
+      <MuiAppBar position='static' color='default'>
         <MuiTabs
           value={tabIndex}
           onChange={handleChange(setTabIndex)}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
+          indicatorColor='primary'
+          textColor='primary'
+          variant='fullWidth'
         >
-          <MuiTab label="Rascunhos" />
-          <MuiTab label="Posts" />
+          <MuiTab label='Rascunhos' />
+          <MuiTab label='Posts' />
         </MuiTabs>
       </MuiAppBar>
       <SwipeableViews
@@ -43,10 +43,10 @@ const Tabs = () => {
         onChangeIndex={handleChangeIndex(setTabIndex)}
       >
         <TabContainer dir={theme.direction}>
-          <TabContent QUERY={DRAFTS} />
+          <TabContent QUERY={DRAFTS} queryName='drafts'/>
         </TabContainer>
         <TabContainer dir={theme.direction}>
-          <TabContent QUERY={POSTS} />
+          <TabContent QUERY={POSTS} queryName='posts' />
         </TabContainer>
       </SwipeableViews>
     </>

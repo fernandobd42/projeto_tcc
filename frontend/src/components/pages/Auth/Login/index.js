@@ -148,7 +148,7 @@ const Login = ({ history }) => {
     <Flex>
       <Paper>
         <Header>
-          <Title variant="h4">Login</Title>
+          <Title variant='h4'>Login</Title>
         </Header>
         <Mutation mutation={LOGIN}>
           {(signin, { loading }) => (
@@ -162,17 +162,17 @@ const Login = ({ history }) => {
               <FormFields>
                 <FormikField
                   required
-                  name="email"
-                  label="Email"
-                  placeholder="email@gmail.com"
+                  name='email'
+                  label='Email'
+                  placeholder='email@gmail.com'
                   component={InputField}
                 />
                 <FormikField
                   required
-                  name="password"
+                  name='password'
                   type={typePassword}
-                  label="Senha"
-                  placeholder="*********"
+                  label='Senha'
+                  placeholder='*********'
                   component={InputField}
                   endIcon={
                     <MuiTooltip title={tooltipPassword} aria-label={tooltipPassword}>
@@ -183,11 +183,11 @@ const Login = ({ history }) => {
                   }
                 />
               </FormFields>
-              <CustomButton type="submit" variant="outlined" color="primary" disabled={loading} onClick={onSubmit}>
+              <CustomButton type='submit' variant='outlined' color='primary' disabled={loading} onClick={onSubmit}>
                 Entrar
               </CustomButton>
               <Footer>
-                <CustomButton type="button" color="primary" onClick={() => redirectToRegister()}>
+                <CustomButton type='button' color='primary' onClick={() => redirectToRegister()}>
                   Cadastrar
                 </CustomButton>
               </Footer>

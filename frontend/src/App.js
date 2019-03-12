@@ -28,9 +28,9 @@ const App = () => {
 
   return (
     <Switch>
-      <Route path="/auth" component={AuthPage} />
-      <Route path="/admin" component={AdminPage} />
-      <Route path="/" exact render={() => <Redirect to="/auth" />} />
+      <Route path='/auth' component={AuthPage} />
+      <Route path='/admin' component={AdminPage} />
+      <Route path='/' exact render={() => <Redirect to='/auth' />} />
       <Route component={NotFoundPage} />
     </Switch>
   )

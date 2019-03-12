@@ -18,9 +18,9 @@ const Auth = ({ history }) => {
 
   return (
     <Switch>
-      <Route path="/auth/login" exact component={LoginPage} />
-      <Route path="/auth/register" exact component={RegisterPage} />
-      <Route path="/auth" exact render={() => <Redirect to="/auth/login" />} />
+      <Route path='/auth/login' exact component={LoginPage} />
+      <Route path='/auth/register' exact component={RegisterPage} />
+      <Route path='/auth' exact render={() => <Redirect to='/auth/login' />} />
       <Route component={NotFoundPage} />
     </Switch>
   )
