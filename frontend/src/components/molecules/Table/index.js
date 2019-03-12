@@ -40,8 +40,6 @@ const handleRequestSort = (order, setOrder, setOrderBy, orderBy) => (_, property
   setOrderBy(newOrderBy)
 }
 
-const selectRow = item => item && console.log(item)
-
 const Table = ({ headers, rows }) => {
   const rowsPerPageOptions = [10, 25, 50, 100]
   const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0])
@@ -65,7 +63,6 @@ const Table = ({ headers, rows }) => {
           tableOrder={tableOrder}
           tableOrderBy={tableOrderBy}
           tableRowsPerPage={tableRowsPerPage}
-          selectRow={selectRow}
         />
       </MuiTable>
       <MuiPagination

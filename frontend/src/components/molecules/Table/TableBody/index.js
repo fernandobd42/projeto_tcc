@@ -6,6 +6,11 @@ import styled from 'styled-components'
 import MuiTableBody from '@material-ui/core/TableBody'
 import MuiTableRow from '@material-ui/core/TableRow'
 import MuiTableCell from '@material-ui/core/TableCell'
+import MuiButton from '@material-ui/core/Button'
+import MuiIconDelete from '@material-ui/icons/Delete'
+import MuiIconEdit from '@material-ui/icons/Edit'
+
+import Flex from 'components/atoms/Flex'
 
 import theme from 'app/theme'
 
@@ -17,6 +22,10 @@ const CustomTableBody = styled(MuiTableBody)`
 
 const CustomTableRow = styled(MuiTableRow)`
   && {
+    &:nth-child(odd) {
+      background-color: ${theme.palette.grey[100]};
+    }
+
     &:hover {
       cursor: pointer;
     }
@@ -25,7 +34,15 @@ const CustomTableRow = styled(MuiTableRow)`
 
 const StyledBoolItem = styled.strong`
   && {
-    color: ${props => props.item ? `${theme.palette.primary.main}` : `${theme.palette.grey[500]}`};
+    color: ${props => props.item ? `${theme.palette.primary.main}` : `${theme.palette.danger[700]}`};
+  }
+`
+
+const CustomButton = styled(MuiButton)`
+  && {
+    min-width: auto;
+    padding 4px;
+    color: ${props => props.btncolor};
   }
 `
 
@@ -46,17 +63,17 @@ const stableSort = (array, cmp) => {
 
 const CustomCell = ({ item }) => (
   typeof item === 'boolean' 
-    ? <StyledBoolItem item={item}>{item.toString()}</StyledBoolItem>
+    ? <StyledBoolItem item={item}>{item ? 'Sim' : 'Não'}</StyledBoolItem>
     : item
 )
 
-const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRowsPerPage, selectRow }) => (
+const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRowsPerPage }) => (
   <CustomTableBody>
     {
       stableSort(tableRows, getSorting(tableOrder, tableOrderBy))
       .slice(currentPage * tableRowsPerPage, currentPage * tableRowsPerPage + tableRowsPerPage)
       .map(item => (
-        <CustomTableRow key={item.allObject.id} hover onClick={() => selectRow(item)}>
+        <CustomTableRow key={item.allObject.id}>
           {
             Object.entries(item)
             .map(([key, value]) => key !== 'allObject' && 
@@ -65,8 +82,22 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
               </MuiTableCell>
             )
           }
-          <MuiTableCell key='options'>
-          
+          <MuiTableCell key='publishPost' align='center'>
+            <CustomButton size='small' btncolor={theme.palette.primary.main} onClick={() => console.log('publicar')}>
+              { !item.published && 'Publicar' }
+            </CustomButton>
+          </MuiTableCell>
+          <MuiTableCell key='options' align='right'>
+            <Flex direction='column' height='auto' alignItems='flex-end'>
+              <CustomButton size='small' btncolor={theme.palette.primary.main} onClick={() => console.log('editar')}>
+                <MuiIconEdit fontSize='small' />
+                Editar
+              </CustomButton>
+              <CustomButton size='small' btncolor={theme.palette.danger[700]} onClick={() => console.log('excluir')}>
+                <MuiIconDelete fontSize='small' />
+                Excluir
+              </CustomButton>
+            </Flex>
           </MuiTableCell>
         </CustomTableRow>
       ))

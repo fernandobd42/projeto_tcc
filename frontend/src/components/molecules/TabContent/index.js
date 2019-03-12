@@ -7,8 +7,10 @@ import Loading from 'components/atoms/Loading'
 import Table from 'components/molecules/Table'
 
 const headers = [
-  { id: 'title', label: 'Título', align: 'left' },
-  { id: 'published', label: 'Publicado', align: 'left' },
+  { id: 'title', label: 'Título', align: 'left', reorder: true },
+  { id: 'published', label: 'Publicado', align: 'left', reorder: false },
+  { id: 'publishPost', label: '', align: 'center', reorder: false },
+  { id: 'options', label: 'Opções', align: 'right', reorder: false },
 ]
 
 const formatObjectRows = rows => {

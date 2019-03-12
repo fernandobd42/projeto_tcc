@@ -17,11 +17,17 @@ const CustomTableHeader = styled(MuiTableHead)`
   }
 `
 
-const CustomMuiTableSortLabel = styled(MuiTableSortLabel)`
+const CustomTableCel = styled(MuiTableCell)`
   && {
     color: ${theme.palette.textPrimary} !important;
     font-weight: ${theme.typography.fontWeightHigh};
     font-size: ${theme.typography.fontSize}px;
+  }
+`
+
+const CustomTableSortLabel = styled(MuiTableSortLabel)`
+  && {
+    color: ${theme.palette.textPrimary} !important;
 
     &:hover {
       color: ${theme.palette.textPrimary};
@@ -37,18 +43,19 @@ const TableHeader = ({ headers, order, orderBy, onRequestSort }) => (
       {
         headers
         .map(row => 
-          <MuiTableCell key={row.id} align={row.align} variant='head' sortDirection={orderBy === row.id ? order : false}>
-            <MuiTooltip title='Reordenar' placement={row.numeric ? 'bottom-end' : 'bottom-start'} enterDelay={300}>
-              <CustomMuiTableSortLabel active={orderBy === row.id} direction={order} onClick={createSortHandler(row.id, onRequestSort)}>
-                {row.label}
-              </CustomMuiTableSortLabel>
-            </MuiTooltip>
-          </MuiTableCell>
+          <CustomTableCel key={row.id} align={row.align} variant='head' sortDirection={orderBy === row.id ? order : false}>
+            {
+              row.reorder 
+              ? <MuiTooltip title='Reordenar' placement={row.numeric ? 'bottom-end' : 'bottom-start'} enterDelay={300}>
+                  <CustomTableSortLabel active={orderBy === row.id} direction={order} onClick={createSortHandler(row.id, onRequestSort)}>
+                    {row.label}
+                  </CustomTableSortLabel>
+                </MuiTooltip>
+              : row.label
+            }
+          </CustomTableCel>
         )
       }
-      <MuiTableCell key='options'>
-      
-      </MuiTableCell>
     </MuiTableRow>
   </CustomTableHeader>
 )
