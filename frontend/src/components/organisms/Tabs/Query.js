@@ -1,11 +1,11 @@
-import gql from "graphql-tag"
+import gql from 'graphql-tag'
 
 export const DRAFTS = gql`
   {
     drafts {
       id
       title
-      content
+      published
     }
   }
 `
@@ -15,7 +15,7 @@ export const POSTS = gql`
     posts {
       id
       title
-      content
+      published
     }
   }
 `

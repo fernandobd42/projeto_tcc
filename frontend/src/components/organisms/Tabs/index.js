@@ -34,7 +34,7 @@ const Tabs = () => {
           variant='fullWidth'
         >
           <MuiTab label='Rascunhos' />
-          <MuiTab label='Posts' />
+          <MuiTab label='Publicações' />
         </MuiTabs>
       </MuiAppBar>
       <SwipeableViews

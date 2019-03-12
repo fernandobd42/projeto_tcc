@@ -1,25 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
+import * as R from 'ramda'
 
 import Loading from 'components/atoms/Loading'
+import Table from 'components/molecules/Table'
 
-const TabContent = ({ QUERY }) => {
+const headers = [
+  { id: 'title', label: 'Título', align: 'left' },
+  { id: 'published', label: 'Publicado', align: 'left' },
+]
 
-  return (
-    <Query query={QUERY}>
-      {({ data, loading }) => (
-        <>
-          {
-            loading 
-              ? <Loading height="auto"/> 
-              : JSON.stringify(data)
-          }
-        </>
-      )}
-    </Query>
-  )
+const formatObjectRows = rows => {
+  const rowsWithAllObject = rows.map(element => (element = { ...element, allObject: element }))
+  const rowsFormated = rowsWithAllObject.map(R.omit(['__typename', 'id', 'content']))
+  return rowsFormated
 }
+
+const TabContent = ({ QUERY, queryName }) => (
+  <Query query={QUERY}>
+    {({ data, loading }) => (
+      loading 
+        ? <Loading height='auto'/> 
+        : <Table
+            headers={headers}
+            rows={formatObjectRows(data[`${queryName}`])}
+          />
+    )}
+  </Query>
+)
 
 TabContent.propTypes = {
   QUERY: PropTypes.object.isRequired,
