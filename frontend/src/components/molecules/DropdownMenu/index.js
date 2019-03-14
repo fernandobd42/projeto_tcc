@@ -83,7 +83,7 @@ const DropdownMenu = ({ history }) => {
           style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
         >
           <MuiPaper>
-            <MuiClickAwayListener onClickAway={closePopper}>
+            <MuiClickAwayListener onClickAway={closePopper()}>
               <MuiMenuList>
                 <MuiMenuItem onClick={event => 
                   {

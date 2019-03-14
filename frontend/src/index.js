@@ -7,6 +7,7 @@ import StoreProvider from 'app/store'
 import apolloClient from 'app/apolloClient'
 
 import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider } from '@material-ui/core/styles'
@@ -19,14 +20,16 @@ import theme from './app/theme'
 ReactDOM.render(
   <StoreProvider>
     <ApolloProvider client={apolloClient}>
-      <MuiThemeProvider theme={theme}>
-        <BrowserRouter basename='/'>
-          <Suspense fallback={<Loading />}>
-            <CssBaseline />
-            <App />
-          </Suspense>
-        </BrowserRouter>
-      </MuiThemeProvider>
+      <ApolloHooksProvider client={apolloClient}>
+        <MuiThemeProvider theme={theme}>
+          <BrowserRouter basename='/'>
+            <Suspense fallback={<Loading />}>
+              <CssBaseline />
+              <App />
+            </Suspense>
+          </BrowserRouter>
+        </MuiThemeProvider>
+      </ApolloHooksProvider>
     </ApolloProvider>
   </StoreProvider>,
   document.getElementById('root')
