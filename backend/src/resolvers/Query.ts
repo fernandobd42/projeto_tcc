@@ -1,8 +1,25 @@
 import { getUserId, Context } from '../utils'
 
 export const Query = {
+  allPosts(parent, args, ctx: Context) {
+    const where = {
+      published: true,
+    }
+
+    return ctx.prisma.posts({ where })
+  },
+
   posts(parent, args, ctx: Context) {
-    return ctx.prisma.posts({ where: { published: true } })
+    const id = getUserId(ctx)
+
+    const where = {
+      published: true,
+      author: {
+        id,
+      },
+    }
+
+    return ctx.prisma.posts({ where })
   },
 
   drafts(parent, args, ctx: Context) {

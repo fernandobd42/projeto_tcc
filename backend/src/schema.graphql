@@ -1,8 +1,9 @@
 type Query {
+  allPosts: [Post!]!
   posts: [Post!]!
   drafts: [Post!]!
-  post(id: ID!): Post
-  me: User
+  post(id: ID!): Post!
+  me: User!
 }
 
 type Mutation {
