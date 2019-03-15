@@ -7,9 +7,11 @@ import * as R from 'ramda'
 import theme from 'app/theme'
 
 import Loading from 'components/atoms/Loading'
+import Flex from 'components/atoms/Flex'
 import Input from 'components/atoms/Input'
 import Table from 'components/molecules/Table'
 
+import MuiButton from '@material-ui/core/Button'
 import MuiIconButton from '@material-ui/core/IconButton'
 import MuiTooltip from '@material-ui/core/Tooltip'
 import MuiIconSearch from '@material-ui/icons/Search'
@@ -21,9 +23,14 @@ const headers = [
   { id: 'options', label: 'Opções', align: 'right', reorder: false },
 ]
 
-const CustomInput = styled(Input)`
+const CustomFlex = styled(Flex)`
   && {
     padding-bottom: ${theme.spacing.unit * 2}px;
+
+    > button {
+      color: ${theme.palette.textPrimary};
+      margin-left: ${theme.spacing.unit * 4}px;
+    }
   }
 `
 
@@ -70,20 +77,26 @@ const TabContent = ({ QUERY, queryName }) => {
 
   return (
     <>
-      <CustomInput 
-        value={filterValue}
-        onChange={e => setFilterValue(e.target.value)}
-        label='Filtro'
-        placeholder='Busque por algum título'
-        onKeyUp={pressEnter(filterValue, rows, setTmpRows)}
-        endIcon={
-          <MuiTooltip title='Pesquisar' aria-label='Pesquisar'>
-            <MuiIconButton onClick={search(filterValue, rows, setTmpRows)}>
-              <MuiIconSearch />
-            </MuiIconButton>
-          </MuiTooltip>
+      <CustomFlex height='auto'>
+        <Input 
+          value={filterValue}
+          onChange={e => setFilterValue(e.target.value)}
+          label='Filtro'
+          placeholder='Busque por algum título'
+          onKeyUp={pressEnter(filterValue, rows, setTmpRows)}
+          endIcon={
+            <MuiTooltip title='Pesquisar' aria-label='Pesquisar'>
+              <MuiIconButton onClick={search(filterValue, rows, setTmpRows)}>
+                <MuiIconSearch />
+              </MuiIconButton>
+            </MuiTooltip>
+          }
+        />
+        {
+          queryName === 'drafts' &&
+          <MuiButton variant="contained" color="primary" onClick={() => console.log('novo')}>Novo</MuiButton>
         }
-      />
+      </CustomFlex>
 
       {
         !tmpRows.length

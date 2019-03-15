@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
-
 import { withRouter } from 'react-router-dom'
 
 import theme from 'app/theme'

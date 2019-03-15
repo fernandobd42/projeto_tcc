@@ -33,8 +33,8 @@ const Tabs = () => {
           textColor='primary'
           variant='fullWidth'
         >
-          <MuiTab label='Rascunhos' />
-          <MuiTab label='Publicações' />
+          <MuiTab label='Meus Rascunhos' />
+          <MuiTab label='Minhas Publicações' />
         </MuiTabs>
       </MuiAppBar>
       <SwipeableViews

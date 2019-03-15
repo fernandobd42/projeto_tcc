@@ -1,30 +1,67 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { withRouter } from 'react-router-dom'
 
 import theme from 'app/theme'
 
 import DropdownMenu from 'components/molecules/DropdownMenu'
+import Flex from 'components/atoms/Flex'
 
 import MuiAppBar from '@material-ui/core/AppBar'
 import MuiToolbar from '@material-ui/core/Toolbar'
 import MuiTypography from '@material-ui/core/Typography'
+import MuiButton from '@material-ui/core/Button'
 
-const Title = styled(MuiTypography)`
+
+const CustomButton = styled(MuiButton)`
   && {
-    color: ${theme.palette.textPrimary};
-    flex-grow: 1;
+    ${props =>
+      props.disabled &&
+      css`
+        background-color: ${theme.palette.primary[300]};
+        cursor: not-allowed !important;
+        pointer-events: initial !important;
+
+        &:hover {
+          background-color: ${theme.palette.primary[300]} !important;
+        }
+    `};
   }
 `
 
-const AppBar = () => (
-  <MuiAppBar position='absolute'>
-    <MuiToolbar>
-      <Title variant='h6'>
-        Publicações
-      </Title>
-      <DropdownMenu />
-    </MuiToolbar>
-  </MuiAppBar>
-)
+const ButtonText = styled(MuiTypography)`
+  && {
+    color: ${theme.palette.textPrimary};
+    font-weight: ${theme.typography.fontWeightMedium};
+  }
+`
 
-export default AppBar
+const AppBar = ({ history }) => {
+  const redirectToFeed = () => history.push('/admin/feed')
+  const redirectToPublications = () => history.push('/admin/publications')
+  const route = history.location.pathname.split('/').pop()
+
+  return (
+    <MuiAppBar position='absolute'>
+      <MuiToolbar>
+        <Flex height='auto' justify='flex-start' flex={1}>
+          <CustomButton onClick={redirectToFeed} disabled={route === 'feed'}>
+            <ButtonText variant='subtitle1'>
+              Página Inicial
+            </ButtonText>
+          </CustomButton>
+          <CustomButton onClick={redirectToPublications} disabled={route === 'publications'}>
+            <ButtonText variant='subtitle1'>
+              Publicações
+            </ButtonText>
+          </CustomButton>
+
+        </Flex>
+        <DropdownMenu />
+      </MuiToolbar>
+    </MuiAppBar>
+  )
+
+}
+
+export default withRouter(AppBar)

@@ -45,7 +45,7 @@ const Paper = styled(MuiPaper)`
   }
 `
 
-const Home = () => (
+const Publications = () => (
   <CustomFlex direction='column' justify='start' height='auto'>
     <Title>
       Gerenciar Publicações
@@ -57,4 +57,4 @@ const Home = () => (
   </CustomFlex>
 )
 
-export default Home
+export default Publications

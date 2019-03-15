@@ -7,15 +7,17 @@ import ProtectedRoute from 'components/molecules/ProtectedRoute'
 import Page from 'components/templates/Page'
 import AppBar from 'components/organisms/AppBar'
 
-const HomePage = React.lazy(() => import('components/pages/Admin/Home'))
+const FeedPage = React.lazy(() => import('components/pages/Admin/Feed'))
+const PublicationsPage = React.lazy(() => import('components/pages/Admin/Publications'))
 const NotFoundPage = React.lazy(() => import('components/pages/NotFound'))
 
 const Admin = () => (
   <Page header={<AppBar />}>
     <Switch>
-      <ProtectedRoute path='/admin/home' exact component={HomePage} />
-      <Route path='/admin' exact render={() => <Redirect to='/admin/home' />} />
-      <Route component={NotFoundPage} />
+      <ProtectedRoute path='/admin/feed' exact component={FeedPage} />
+      <ProtectedRoute path='/admin/publications' exact component={PublicationsPage} />
+      <Route path='/admin' exact render={() => <Redirect to='/admin/feed' />} />
+      <ProtectedRoute component={NotFoundPage} />
     </Switch>
   </Page>
 )
