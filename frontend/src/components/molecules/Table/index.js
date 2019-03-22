@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-
 import styled from 'styled-components'
 
 import MuiTable from '@material-ui/core/Table'
@@ -40,7 +39,7 @@ const handleRequestSort = (order, setOrder, setOrderBy, orderBy) => (_, property
   setOrderBy(newOrderBy)
 }
 
-const Table = ({ headers, rows }) => {
+const Table = ({ headers, rows, refetchQuery }) => {
   const rowsPerPageOptions = [10, 25, 50, 100]
   const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0])
   const [order, setOrder] = useState('asc')
@@ -63,6 +62,7 @@ const Table = ({ headers, rows }) => {
           tableOrder={tableOrder}
           tableOrderBy={tableOrderBy}
           tableRowsPerPage={tableRowsPerPage}
+          refetchRows={refetchQuery}
         />
       </MuiTable>
       <MuiPagination

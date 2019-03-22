@@ -6,20 +6,19 @@ import * as R from 'ramda'
 
 import theme from 'app/theme'
 
-import Loading from 'components/atoms/Loading'
-import Flex from 'components/atoms/Flex'
-import Input from 'components/atoms/Input'
-import Table from 'components/molecules/Table'
-
 import MuiButton from '@material-ui/core/Button'
 import MuiIconButton from '@material-ui/core/IconButton'
 import MuiTooltip from '@material-ui/core/Tooltip'
 import MuiIconSearch from '@material-ui/icons/Search'
 
+import Loading from 'components/atoms/Loading'
+import Flex from 'components/atoms/Flex'
+import Input from 'components/atoms/Input'
+import Table from 'components/molecules/Table'
+
 const headers = [
   { id: 'title', label: 'Título', align: 'left', reorder: true },
   { id: 'published', label: 'Publicado', align: 'left', reorder: false },
-  { id: 'publishPost', label: '', align: 'center', reorder: false },
   { id: 'options', label: 'Opções', align: 'right', reorder: false },
 ]
 
@@ -35,10 +34,10 @@ const CustomFlex = styled(Flex)`
 `
 
 const formatObjectRows = (queryData, setRows, setTmpRows) => {
-    const rowsWithAllObject = queryData.map(element => (element = { ...element, allObject: element }))
-    const rowsFormated = rowsWithAllObject.map(R.omit(['__typename', 'id', 'content']))
-    setRows(rowsFormated)
-    setTmpRows(rowsFormated)
+  const rowsWithAllObject = queryData.map(element => (element = { ...element, allObject: element }))
+  const rowsFormated = rowsWithAllObject.map(R.omit(['__typename', 'id', 'content']))
+  setRows(rowsFormated)
+  setTmpRows(rowsFormated)
 }
 
 const pressEnter = (value, rows, setTmpRows) => event => {
@@ -52,19 +51,30 @@ const search = (value, rows, setTmpRows) => _ => {
   setTmpRows(newRows)
 }
 
-const TabContent = ({ QUERY, queryName }) => {
+const TabContent = ({ QUERY, queryName, tabIndex, index}) => {
   const [filterValue, setFilterValue] = useState('')
   const [tmpRows, setTmpRows] = useState(undefined)
   const [rows, setRows] = useState(undefined)
-  const {data,loading} = useQuery(QUERY)
+  const {data, loading, refetch} = useQuery(QUERY)
 
   useEffect(() => {
-    if (!filterValue) {
+    if (!filterValue && !!rows) {
       setTmpRows(rows)
     }
-    
-    search(filterValue, rows, setTmpRows)
-  }, [filterValue])
+
+    if (!!data.drafts) {
+      formatObjectRows(data[`${queryName}`], setRows, setTmpRows)
+    }
+
+    if (tabIndex === 1) {
+      refetch()
+      formatObjectRows(data[`${queryName}`], setRows, setTmpRows)
+    }
+
+    if (!!rows) {
+      search(filterValue, rows, setTmpRows)
+    }
+  }, [filterValue, data, tabIndex])
 
   if (loading) {
     return <Loading height='auto' /> 
@@ -104,6 +114,7 @@ const TabContent = ({ QUERY, queryName }) => {
         : <Table
             headers={headers}
             rows={tmpRows}
+            refetchQuery={refetch}
           />
       }
     </>
