@@ -2,13 +2,16 @@ import Swal from 'sweetalert2'
 
 import PropTypes from 'prop-types'
 
+import theme from 'app/theme'
+
 const Alert = (type, title, text) => (
   Swal.fire({
     title: title,
     text: text,
     type: type,
     timer: 5000,
-    confirmButtonText: 'Fechar'
+    confirmButtonText: 'Fechar',
+    confirmButtonColor: theme.palette.primary.main,
   })
 )
 
