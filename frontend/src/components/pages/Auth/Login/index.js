@@ -89,7 +89,7 @@ const validationSchema = Yup.object().shape({
     .min(8, 'Senha deve ter no mínimo 8 caracteres')
 })
 
-const submit = (mutation, redirectToHome, setUser) => async ({ email, password }, { setSubmitting }) => {
+const submit = (mutation, redirectToFeed, setUser) => async ({ email, password }, { setSubmitting }) => {
   try {
     const { data } = await mutation({
       variables: 
@@ -104,7 +104,7 @@ const submit = (mutation, redirectToHome, setUser) => async ({ email, password }
     setUser(result.user)
     setToken(result.token)
     Alert('success', 'Sucesso', 'Login realizado com sucesso!')
-    redirectToHome()
+    redirectToFeed()
   } catch (error) {
     if (error.message.includes('No such user found for email')) {
       Alert('error', 'Error', 'Email não cadastrado!')
@@ -142,7 +142,7 @@ const Login = ({ history }) => {
   const [tooltipPassword, setTooltipPassword] = useState('Mostrar senha')
   const [, setUser] = useContext(ContextAPI)
   const redirectToRegister = () => history.push('/auth/register')
-  const redirectToHome = () => history.push('/admin/home')
+  const redirectToFeed = () => history.push('/admin/feed')
 
   return (
     <Flex>
@@ -155,7 +155,7 @@ const Login = ({ history }) => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={submit(signin, redirectToHome, setUser)}
+            onSubmit={submit(signin, redirectToFeed, setUser)}
           > 
           {({ onSubmit }) => (
             <Form>

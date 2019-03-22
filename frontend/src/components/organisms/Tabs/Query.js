@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const DRAFTS = gql`
+export const DRAFTS_QUERY = gql`
   {
     drafts {
       id
@@ -10,7 +10,7 @@ export const DRAFTS = gql`
   }
 `
 
-export const POSTS = gql`
+export const POSTS_QUERY = gql`
   {
     posts {
       id

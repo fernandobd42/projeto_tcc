@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import SwipeableViews from 'react-swipeable-views'
 
-import { DRAFTS, POSTS } from 'components/organisms/Tabs/Query'
+import { DRAFTS_QUERY, POSTS_QUERY } from './Query'
 
 import theme from 'app/theme'
 
@@ -11,6 +11,7 @@ import MuiTab from '@material-ui/core/Tab'
 
 import TabContainer from 'components/atoms/TabContainer'
 import TabContent from 'components/molecules/TabContent'
+import Loading from 'components/atoms/Loading'
 
 const handleChange = setTabIndex => (_, value) => {
   setTabIndex(value)
@@ -24,7 +25,7 @@ const Tabs = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
   return (
-    <>
+    <Suspense fallback={<Loading height='auto' />}>
       <MuiAppBar position='static' color='default'>
         <MuiTabs
           value={tabIndex}
@@ -43,13 +44,13 @@ const Tabs = () => {
         onChangeIndex={handleChangeIndex(setTabIndex)}
       >
         <TabContainer dir={theme.direction}>
-          <TabContent QUERY={DRAFTS} queryName='drafts'/>
+          <TabContent QUERY={DRAFTS_QUERY} queryName='drafts' tabIndex={tabIndex} />
         </TabContainer>
         <TabContainer dir={theme.direction}>
-          <TabContent QUERY={POSTS} queryName='posts' />
+          <TabContent QUERY={POSTS_QUERY} queryName='posts' tabIndex={tabIndex} />
         </TabContainer>
       </SwipeableViews>
-    </>
+    </Suspense>
   )
 }
 

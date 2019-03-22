@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import theme from 'app/theme'
-
 import Flex from 'components/atoms/Flex'
 import Tabs from 'components/organisms/Tabs'
 
@@ -15,16 +13,10 @@ const CustomFlex = styled(Flex)`
   }
 `
 
-const Title = styled.h1`
-  && {
-    color: ${theme.palette.primary.main};
-    padding: ${theme.spacing.unit * 4}px 0;
-  }
-`
-
 const Paper = styled(MuiPaper)`
   && {
     width: 1200px;
+    margin: 50px 0px;
     transition: all ease-in-out .5s;
 
     @media (max-width: 1300px) {
@@ -47,10 +39,6 @@ const Paper = styled(MuiPaper)`
 
 const Publications = () => (
   <CustomFlex direction='column' justify='start' height='auto'>
-    <Title>
-      Gerenciar Publicações
-    </Title>
-
     <Paper elevation={7}>
       <Tabs />
     </Paper>
