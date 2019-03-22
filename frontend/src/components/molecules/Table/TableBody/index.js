@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import PUBLISH from './Mutation'
 
@@ -39,6 +39,12 @@ const CustomTableRow = styled(MuiTableRow)`
 const CustomTableCell = styled(MuiTableCell)`
   && {
     padding-right: 16px !important;
+
+    ${props => 
+      props.disabled && css`
+        cursor: not-allowed;
+      `
+    }
   }
 `
 
@@ -52,13 +58,19 @@ const CustomButton = styled(MuiButton)`
   && {
     min-width: auto;
     padding 4px 6px 4px 4px;
-    color: ${theme.palette.textPrimary};
+    color: ${theme.palette.textPrimary} !important;
     background-color: ${props => props.btncolor} !important;
     right: ${props => props.right || 0}px;
 
     &:hover {
       opacity: 0.75;
       transition: all .3s ease-in-out;
+    }
+
+    ${props => 
+      props.disabled && css`
+        background-color: gray !important;
+      `
     }
   }
 `
@@ -106,7 +118,7 @@ const CustomCell = ({ item }) => (
 
 const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRowsPerPage, refetchRows }) => (
   <Mutation mutation={PUBLISH}>
-   {(publish, { loading }) => (
+    {(publish, { loading }) => (
       <CustomTableBody>
         {
           stableSort(tableRows, getSorting(tableOrder, tableOrderBy))
@@ -121,11 +133,11 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
                   </MuiTableCell>
                 )
               }
-              <CustomTableCell key='options' align='right'>
+              <CustomTableCell key='options' align='right' disabled={loading}>
                 <Flex height='auto' justify="flex-end">
                   { 
                     !item.published && 
-                      <CustomButton size='small' disabled={loading} right={12} btncolor={theme.palette.primary.main} onClick={() =>
+                      <CustomButton size='small' disabled={loading} right={12} btncolor={theme.palette.success[700]} onClick={() =>
                         AlertConfirm(
                           'Atenção', 
                           'Após confirmar está ação não poderá ser desfeita.', 
@@ -135,11 +147,11 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
                         Publicar
                       </CustomButton>
                   }
-                  <CustomButton size='small' btncolor={theme.palette.primary.main} right={7} onClick={() => console.log('editar')}>
+                  <CustomButton size='small' disabled={loading} btncolor={theme.palette.primary.main} right={7} onClick={() => console.log('editar')}>
                     <MuiIconEdit fontSize='small' />
                     Editar
                   </CustomButton>
-                  <CustomButton size='small' btncolor={theme.palette.danger[700]} onClick={() => console.log('excluir')}>
+                  <CustomButton size='small' disabled={loading} btncolor={theme.palette.danger[700]} onClick={() => console.log('excluir')}>
                     <MuiIconDelete fontSize='small' />
                     Excluir
                   </CustomButton>
@@ -149,8 +161,8 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
           ))
         }
       </CustomTableBody>
-   )}
-  </Mutation>
+    )}
+    </Mutation>
 )
 
 TableBody.propTypes = {

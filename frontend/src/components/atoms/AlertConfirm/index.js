@@ -10,7 +10,7 @@ const AlertConfirm = (title, text, msgsucesso, action) => (
     text: text,
     type: 'warning',
     confirmButtonText: 'Confirmar',
-    confirmButtonColor: theme.palette.primary.main,
+    confirmButtonColor: theme.palette.success[700],
     cancelButtonColor: theme.palette.danger.main,
     showCancelButton: true,
   }).then((result) => {

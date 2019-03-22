@@ -15,7 +15,6 @@ const Content = styled.main`
   flex-grow: 1;
   padding: ${theme.spacing.unit * 7}px;
   height: 100vh;
-  overflow: auto;
 
   @media (max-width: 700px) {
     padding: ${theme.spacing.unit * 4}px;

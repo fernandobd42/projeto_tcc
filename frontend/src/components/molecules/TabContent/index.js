@@ -6,6 +6,7 @@ import * as R from 'ramda'
 
 import theme from 'app/theme'
 
+import MuiTypography from '@material-ui/core/Typography'
 import MuiButton from '@material-ui/core/Button'
 import MuiIconButton from '@material-ui/core/IconButton'
 import MuiTooltip from '@material-ui/core/Tooltip'
@@ -110,7 +111,7 @@ const TabContent = ({ QUERY, queryName, tabIndex, index}) => {
 
       {
         !tmpRows.length
-        ? <p>Nenhum item encontrado</p>
+        ? <MuiTypography variant='h6'>Nenhum item encontrado</MuiTypography>
         : <Table
             headers={headers}
             rows={tmpRows}
