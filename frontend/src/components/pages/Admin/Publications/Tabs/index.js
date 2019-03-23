@@ -9,9 +9,9 @@ import MuiAppBar from '@material-ui/core/AppBar'
 import MuiTabs from '@material-ui/core/Tabs'
 import MuiTab from '@material-ui/core/Tab'
 
-import TabContainer from 'components/atoms/TabContainer'
-import TabContent from 'components/molecules/TabContent'
 import Loading from 'components/atoms/Loading'
+import TabContainer from 'components/atoms/TabContainer'
+import TabContent from 'components/organisms/TabContent'
 
 const handleChange = setTabIndex => (_, value) => {
   setTabIndex(value)

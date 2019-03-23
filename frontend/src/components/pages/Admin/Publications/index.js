@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Flex from 'components/atoms/Flex'
-import Tabs from 'components/organisms/Tabs'
+import Tabs from './Tabs'
 
 import MuiPaper from '@material-ui/core/Paper'
 

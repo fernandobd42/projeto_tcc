@@ -52,7 +52,7 @@ const search = (value, rows, setTmpRows) => _ => {
   setTmpRows(newRows)
 }
 
-const TabContent = ({ QUERY, queryName, tabIndex, index}) => {
+const TabContent = ({ QUERY, queryName, tabIndex }) => {
   const [filterValue, setFilterValue] = useState('')
   const [tmpRows, setTmpRows] = useState(undefined)
   const [rows, setRows] = useState(undefined)
