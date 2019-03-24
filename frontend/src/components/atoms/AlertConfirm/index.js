@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 
 import theme from 'app/theme'
 
-const AlertConfirm = (title, text, msgsucesso, action) => (
+const AlertConfirm = (msgsucesso, action) => (
   Swal.fire({
-    title: title,
-    text: text,
+    title: 'Atenção',
+    text: 'Após confirmar, está ação não poderá ser desfeita.',
     type: 'warning',
     confirmButtonText: 'Confirmar',
     confirmButtonColor: theme.palette.success[700],

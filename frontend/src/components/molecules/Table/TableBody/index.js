@@ -143,8 +143,6 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
                       !item.published && 
                         <CustomButton size='small' disabled={loadingPublish || loadingDeletePost} right={12} btncolor={theme.palette.success[700]} onClick={() =>
                           AlertConfirm(
-                            'Atenção', 
-                            'Após confirmar está ação não poderá ser desfeita.', 
                             'Rascunho publicado com sucesso.',
                             publishDeleteItem(publish, item, refetch, 'publicar'),
                         )}>
@@ -157,8 +155,6 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
                     </CustomButton>
                     <CustomButton size='small' disabled={loadingPublish || loadingDeletePost} btncolor={theme.palette.danger[700]} onClick={() => 
                       AlertConfirm(
-                        'Atenção', 
-                        'Após confirmar está ação não poderá ser desfeita.', 
                         'Item excluído com sucesso.',
                         publishDeleteItem(deletePost, item, refetch, 'excluir'),
                     )}>
