@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import { useQuery } from 'react-apollo-hooks'
 import styled from 'styled-components'
 import * as R from 'ramda'
@@ -54,23 +55,21 @@ const search = (value, rows, setTmpRows) => _ => {
   setTmpRows(newRows)
 }
 
-const TabContent = ({ QUERY, queryName, tabIndex }) => {
+const TabContent = ({ QUERY, queryName, tabIndex, history }) => {
   const [filterValue, setFilterValue] = useState('')
   const [tmpRows, setTmpRows] = useState(undefined)
   const [rows, setRows] = useState(undefined)
   const {data, loading, refetch} = useQuery(QUERY)
+  const redirectToNewDraft = () => history.push('/admin/newDraft')
 
   useEffect(() => {
     if (!filterValue && !!rows) {
       setTmpRows(rows)
     }
 
+    refetch()
+    
     if (!!data.drafts || !!data.posts) {
-      formatObjectRows(data[`${queryName}`], setRows, setTmpRows)
-    }
-
-    if (tabIndex === 1 && !loading) {
-      refetch()
       formatObjectRows(data[`${queryName}`], setRows, setTmpRows)
     }
 
@@ -79,10 +78,11 @@ const TabContent = ({ QUERY, queryName, tabIndex }) => {
     }
   }, [filterValue, data, tabIndex])
 
+
   if (loading) {
     return <Loading height='auto' /> 
   }
-
+  
   if (!rows) {
     formatObjectRows(data[`${queryName}`], setRows, setTmpRows)
     return <Loading height='auto' /> 
@@ -107,7 +107,7 @@ const TabContent = ({ QUERY, queryName, tabIndex }) => {
         />
         {
           queryName === 'drafts' &&
-          <MuiButton variant="contained" color="primary" onClick={() => console.log('novo')}>Novo</MuiButton>
+          <MuiButton variant="contained" color="primary" onClick={redirectToNewDraft}>Novo</MuiButton>
         }
       </CustomFlex>
 
@@ -129,4 +129,4 @@ TabContent.propTypes = {
   tabIndex: PropTypes.number.isRequired
 }
 
-export default TabContent
+export default withRouter(TabContent)
