@@ -15,7 +15,6 @@ import MuiIconEdit from '@material-ui/icons/Edit'
 import Flex from 'components/atoms/Flex'
 import Alert from 'components/atoms/Alert'
 import AlertConfirm from 'components/atoms/AlertConfirm'
-import Loading from 'components/atoms/Loading'
 import { ContextAPI } from 'components/organisms/TabContent'
 
 import theme from 'app/theme'
