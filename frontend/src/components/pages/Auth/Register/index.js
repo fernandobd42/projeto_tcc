@@ -204,11 +204,11 @@ const Register = ({ history }) => {
                 />
               </FormFields>
               <CustomButton type='submit' variant='outlined' color='primary' disabled={loading} onClick={onSubmit}>
-                Entrar
+                Cadastrar
               </CustomButton>
               <Footer>
                 <CustomButton type='button' color='primary' onClick={() => redirectToLogin()}>
-                  Login
+                  Entrar
                 </CustomButton>
               </Footer>
             </Form>
