@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -48,7 +48,7 @@ const Table = ({ headers, rows }) => {
   const { tableOrder, tableOrderBy, tableRowsPerPage, tableRows } = tableBody(order, orderBy, rowsPerPage, rows)
 
   return (
-    <>
+    <Fragment>
       <MuiTable>
         <TableHeader 
           headers={headers} 
@@ -80,7 +80,7 @@ const Table = ({ headers, rows }) => {
         onChangePage={handleChangePage(setCurrentPage)}
         labelRowsPerPage='Linhas por página'
       />
-    </>
+    </Fragment>
   )
 }
 
