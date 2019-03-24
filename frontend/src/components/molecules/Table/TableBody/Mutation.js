@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const PUBLISH = gql`
+export const PUBLISH = gql`
   mutation publish($id: ID!) {
     publish(id: $id) {
       id
@@ -9,4 +9,10 @@ const PUBLISH = gql`
   }
 `
 
-export default PUBLISH
+export const DELETE_POST = gql`
+  mutation deletePost($id: ID!) {
+    deletePost(id: $id) {
+      id
+    }
+  }
+`

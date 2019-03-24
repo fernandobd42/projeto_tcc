@@ -65,11 +65,11 @@ const TabContent = ({ QUERY, queryName, tabIndex }) => {
       setTmpRows(rows)
     }
 
-    if (!!data.drafts) {
+    if (!!data.drafts || !!data.posts) {
       formatObjectRows(data[`${queryName}`], setRows, setTmpRows)
     }
 
-    if (tabIndex === 1) {
+    if (tabIndex === 1 && !loading) {
       refetch()
       formatObjectRows(data[`${queryName}`], setRows, setTmpRows)
     }

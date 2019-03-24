@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Mutation } from 'react-apollo'
 import styled, { css } from 'styled-components'
 
-import PUBLISH from './Mutation'
+import {PUBLISH, DELETE_POST} from './Mutation'
 
 import MuiTableBody from '@material-ui/core/TableBody'
 import MuiTableRow from '@material-ui/core/TableRow'
@@ -15,6 +15,7 @@ import MuiIconEdit from '@material-ui/icons/Edit'
 import Flex from 'components/atoms/Flex'
 import Alert from 'components/atoms/Alert'
 import AlertConfirm from 'components/atoms/AlertConfirm'
+import Loading from 'components/atoms/Loading'
 import { ContextAPI } from 'components/organisms/TabContent'
 
 import theme from 'app/theme'
@@ -91,7 +92,7 @@ const stableSort = (array, cmp) => {
   return stabilizedThis.map(element => element[0])
 }
 
-const publishItem = (mutation, item, refetchRows) => async () => {
+const publishDeleteItem = (mutation, item, refetchRows, string) => async () => {
   const id = item.allObject.id
 
   try {
@@ -102,11 +103,11 @@ const publishItem = (mutation, item, refetchRows) => async () => {
       }
     })
 
-    if (data.publish) {
+    if (data) {
       refetchRows()
     }
   } catch (error) {
-    Alert('error', 'Error', 'Erro ao publicar post!')
+    Alert('error', `Error', 'Erro ao ${string} item!`)
   }
 }
 
@@ -119,52 +120,62 @@ const CustomCell = ({ item }) => (
 const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRowsPerPage }) => ( 
   <ContextAPI.Consumer>
     {refetch => (
-      <Mutation mutation={PUBLISH}>
-        {(publish, { loading }) => (
-          <CustomTableBody>
+    <CustomTableBody>
+      {
+        stableSort(tableRows, getSorting(tableOrder, tableOrderBy))
+        .slice(currentPage * tableRowsPerPage, currentPage * tableRowsPerPage + tableRowsPerPage)
+        .map(item => (
+          <CustomTableRow key={item.allObject.id}>
             {
-              stableSort(tableRows, getSorting(tableOrder, tableOrderBy))
-              .slice(currentPage * tableRowsPerPage, currentPage * tableRowsPerPage + tableRowsPerPage)
-              .map(item => (
-                <CustomTableRow key={item.allObject.id}>
-                  {
-                    Object.entries(item)
-                    .map(([key, value]) => key !== 'allObject' && 
-                      <MuiTableCell key={key}>
-                        <CustomCell item={value} />
-                      </MuiTableCell>
-                    )
-                  }
-                  <CustomTableCell key='options' align='right' disabled={loading}>
-                    <Flex height='auto' justify="flex-end">
-                      { 
-                        !item.published && 
-                          <CustomButton size='small' disabled={loading} right={12} btncolor={theme.palette.success[700]} onClick={() =>
-                            AlertConfirm(
-                              'Atenção', 
-                              'Após confirmar está ação não poderá ser desfeita.', 
-                              'Rascunho publicado com sucesso.',
-                              publishItem(publish, item, refetch),
-                          )}>
-                            Publicar
-                          </CustomButton>
-                      }
-                      <CustomButton size='small' disabled={loading} btncolor={theme.palette.primary.main} right={7} onClick={() => console.log('editar')}>
-                        <MuiIconEdit fontSize='small' />
-                        Editar
-                      </CustomButton>
-                      <CustomButton size='small' disabled={loading} btncolor={theme.palette.danger[700]} onClick={() => console.log('excluir')}>
-                        <MuiIconDelete fontSize='small' />
-                        Excluir
-                      </CustomButton>
-                    </Flex>
-                  </CustomTableCell>
-                </CustomTableRow>
-              ))
+              Object.entries(item)
+              .map(([key, value]) => key !== 'allObject' && 
+                <MuiTableCell key={key}>
+                  <CustomCell item={value} />
+                </MuiTableCell>
+              )
             }
-          </CustomTableBody>
-        )}
-        </Mutation>
+            <Mutation mutation={PUBLISH}>
+              {(publish, {loading: loadingPublish }) => (
+              <Mutation mutation={DELETE_POST}>
+                {(deletePost, {loading: loadingDeletePost }) => (
+                <CustomTableCell key='options' align='right' disabled={loadingPublish || loadingDeletePost}>
+                  <Flex height='auto' justify="flex-end">
+                    { 
+                      !item.published && 
+                        <CustomButton size='small' disabled={loadingPublish || loadingDeletePost} right={12} btncolor={theme.palette.success[700]} onClick={() =>
+                          AlertConfirm(
+                            'Atenção', 
+                            'Após confirmar está ação não poderá ser desfeita.', 
+                            'Rascunho publicado com sucesso.',
+                            publishDeleteItem(publish, item, refetch, 'publicar'),
+                        )}>
+                          Publicar
+                        </CustomButton>
+                    }
+                    <CustomButton size='small' disabled={loadingPublish || loadingDeletePost} btncolor={theme.palette.primary.main} right={7} onClick={() => console.log('editar')}>
+                      <MuiIconEdit fontSize='small' />
+                      Editar
+                    </CustomButton>
+                    <CustomButton size='small' disabled={loadingPublish || loadingDeletePost} btncolor={theme.palette.danger[700]} onClick={() => 
+                      AlertConfirm(
+                        'Atenção', 
+                        'Após confirmar está ação não poderá ser desfeita.', 
+                        'Item excluído com sucesso.',
+                        publishDeleteItem(deletePost, item, refetch, 'excluir'),
+                    )}>
+                      <MuiIconDelete fontSize='small' />
+                      Excluir
+                    </CustomButton>
+                  </Flex>
+                </CustomTableCell>
+                )}
+              </Mutation>
+              )}
+            </Mutation>
+          </CustomTableRow>
+        ))
+      }
+    </CustomTableBody>
     )}
   </ContextAPI.Consumer>
 )
