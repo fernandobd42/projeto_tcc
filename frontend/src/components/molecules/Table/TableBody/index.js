@@ -15,6 +15,7 @@ import MuiIconEdit from '@material-ui/icons/Edit'
 import Flex from 'components/atoms/Flex'
 import Alert from 'components/atoms/Alert'
 import AlertConfirm from 'components/atoms/AlertConfirm'
+import { ContextAPI } from 'components/organisms/TabContent'
 
 import theme from 'app/theme'
 
@@ -107,7 +108,6 @@ const publishItem = (mutation, item, refetchRows) => async () => {
   } catch (error) {
     Alert('error', 'Error', 'Erro ao publicar post!')
   }
-
 }
 
 const CustomCell = ({ item }) => (
@@ -116,53 +116,57 @@ const CustomCell = ({ item }) => (
     : item
 )
 
-const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRowsPerPage, refetchRows }) => (
-  <Mutation mutation={PUBLISH}>
-    {(publish, { loading }) => (
-      <CustomTableBody>
-        {
-          stableSort(tableRows, getSorting(tableOrder, tableOrderBy))
-          .slice(currentPage * tableRowsPerPage, currentPage * tableRowsPerPage + tableRowsPerPage)
-          .map(item => (
-            <CustomTableRow key={item.allObject.id}>
-              {
-                Object.entries(item)
-                .map(([key, value]) => key !== 'allObject' && 
-                  <MuiTableCell key={key}>
-                    <CustomCell item={value} />
-                  </MuiTableCell>
-                )
-              }
-              <CustomTableCell key='options' align='right' disabled={loading}>
-                <Flex height='auto' justify="flex-end">
-                  { 
-                    !item.published && 
-                      <CustomButton size='small' disabled={loading} right={12} btncolor={theme.palette.success[700]} onClick={() =>
-                        AlertConfirm(
-                          'Atenção', 
-                          'Após confirmar está ação não poderá ser desfeita.', 
-                          'Rascunho publicado com sucesso.',
-                          publishItem(publish, item, refetchRows),
-                      )}>
-                        Publicar
-                      </CustomButton>
+const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRowsPerPage }) => ( 
+  <ContextAPI.Consumer>
+    {refetch => (
+      <Mutation mutation={PUBLISH}>
+        {(publish, { loading }) => (
+          <CustomTableBody>
+            {
+              stableSort(tableRows, getSorting(tableOrder, tableOrderBy))
+              .slice(currentPage * tableRowsPerPage, currentPage * tableRowsPerPage + tableRowsPerPage)
+              .map(item => (
+                <CustomTableRow key={item.allObject.id}>
+                  {
+                    Object.entries(item)
+                    .map(([key, value]) => key !== 'allObject' && 
+                      <MuiTableCell key={key}>
+                        <CustomCell item={value} />
+                      </MuiTableCell>
+                    )
                   }
-                  <CustomButton size='small' disabled={loading} btncolor={theme.palette.primary.main} right={7} onClick={() => console.log('editar')}>
-                    <MuiIconEdit fontSize='small' />
-                    Editar
-                  </CustomButton>
-                  <CustomButton size='small' disabled={loading} btncolor={theme.palette.danger[700]} onClick={() => console.log('excluir')}>
-                    <MuiIconDelete fontSize='small' />
-                    Excluir
-                  </CustomButton>
-                </Flex>
-              </CustomTableCell>
-            </CustomTableRow>
-          ))
-        }
-      </CustomTableBody>
+                  <CustomTableCell key='options' align='right' disabled={loading}>
+                    <Flex height='auto' justify="flex-end">
+                      { 
+                        !item.published && 
+                          <CustomButton size='small' disabled={loading} right={12} btncolor={theme.palette.success[700]} onClick={() =>
+                            AlertConfirm(
+                              'Atenção', 
+                              'Após confirmar está ação não poderá ser desfeita.', 
+                              'Rascunho publicado com sucesso.',
+                              publishItem(publish, item, refetch),
+                          )}>
+                            Publicar
+                          </CustomButton>
+                      }
+                      <CustomButton size='small' disabled={loading} btncolor={theme.palette.primary.main} right={7} onClick={() => console.log('editar')}>
+                        <MuiIconEdit fontSize='small' />
+                        Editar
+                      </CustomButton>
+                      <CustomButton size='small' disabled={loading} btncolor={theme.palette.danger[700]} onClick={() => console.log('excluir')}>
+                        <MuiIconDelete fontSize='small' />
+                        Excluir
+                      </CustomButton>
+                    </Flex>
+                  </CustomTableCell>
+                </CustomTableRow>
+              ))
+            }
+          </CustomTableBody>
+        )}
+        </Mutation>
     )}
-    </Mutation>
+  </ContextAPI.Consumer>
 )
 
 TableBody.propTypes = {
@@ -171,7 +175,6 @@ TableBody.propTypes = {
   tableOrder: PropTypes.string,
   tableOrderBy: PropTypes.string,
   tableRowsPerPage: PropTypes.number,
-  selectRow: PropTypes.func,
 }
 
 export default TableBody

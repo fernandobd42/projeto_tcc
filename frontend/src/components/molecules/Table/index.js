@@ -39,7 +39,7 @@ const handleRequestSort = (order, setOrder, setOrderBy, orderBy) => (_, property
   setOrderBy(newOrderBy)
 }
 
-const Table = ({ headers, rows, refetchQuery }) => {
+const Table = ({ headers, rows }) => {
   const rowsPerPageOptions = [10, 25, 50, 100]
   const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0])
   const [order, setOrder] = useState('asc')
@@ -62,7 +62,6 @@ const Table = ({ headers, rows, refetchQuery }) => {
           tableOrder={tableOrder}
           tableOrderBy={tableOrderBy}
           tableRowsPerPage={tableRowsPerPage}
-          refetchRows={refetchQuery}
         />
       </MuiTable>
       <MuiPagination

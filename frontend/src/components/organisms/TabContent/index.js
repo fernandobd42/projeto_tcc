@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createContext } from 'react'
 import PropTypes from 'prop-types'
 import { useQuery } from 'react-apollo-hooks'
 import styled from 'styled-components'
@@ -33,6 +33,8 @@ const CustomFlex = styled(Flex)`
     }
   }
 `
+
+export const ContextAPI = createContext()
 
 const formatObjectRows = (queryData, setRows, setTmpRows) => {
   const rowsWithAllObject = queryData.map(element => (element = { ...element, allObject: element }))
@@ -87,7 +89,7 @@ const TabContent = ({ QUERY, queryName, tabIndex }) => {
   }
 
   return (
-    <>
+    <ContextAPI.Provider value={refetch}>
       <CustomFlex height='auto'>
         <Input 
           value={filterValue}
@@ -115,15 +117,16 @@ const TabContent = ({ QUERY, queryName, tabIndex }) => {
         : <Table
             headers={headers}
             rows={tmpRows}
-            refetchQuery={refetch}
           />
       }
-    </>
+    </ContextAPI.Provider>
   )
 }
 
 TabContent.propTypes = {
   QUERY: PropTypes.object.isRequired,
+  queryName: PropTypes.string.isRequired,
+  tabIndex: PropTypes.number.isRequired
 }
 
 export default TabContent
