@@ -34,7 +34,6 @@ export const post = {
       data: {
         title,
         content,
-        published,
       }
     })
   },
