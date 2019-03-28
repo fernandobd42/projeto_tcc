@@ -7,7 +7,7 @@ import StoreProvider from 'app/store'
 import apolloClient from 'app/apolloClient'
 
 import { ApolloProvider } from 'react-apollo'
-import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { MuiThemeProvider } from '@material-ui/core/styles'

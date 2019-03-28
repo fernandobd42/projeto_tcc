@@ -23,7 +23,7 @@ const handleChangeIndex = setTabIndex => index => {
 
 const Tabs = () => {
   const [tabIndex, setTabIndex] = useState(0);
-
+  
   return (
     <Suspense fallback={<Loading height='auto' />}>
       <MuiAppBar position='static' color='default'>
