@@ -1,9 +1,7 @@
-import React, { useState, useEffect, createContext } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
-import { useQuery } from 'react-apollo-hooks'
 import styled from 'styled-components'
-import * as R from 'ramda'
 
 import theme from 'app/theme'
 
@@ -17,6 +15,8 @@ import Loading from 'components/atoms/Loading'
 import Flex from 'components/atoms/Flex'
 import Input from 'components/atoms/Input'
 import Table from 'components/molecules/Table'
+
+export const ContextAPI = createContext()
 
 const headers = [
   { id: 'title', label: 'Título', align: 'left', reorder: true },
@@ -35,15 +35,6 @@ const CustomFlex = styled(Flex)`
   }
 `
 
-export const ContextAPI = createContext()
-
-const formatObjectRows = (queryData, setRows, setTmpRows) => {
-  const rowsWithAllObject = queryData.map(element => (element = { ...element, allObject: element }))
-  const rowsFormated = rowsWithAllObject.map(R.omit(['__typename', 'id', 'content']))
-  setRows(rowsFormated)
-  setTmpRows(rowsFormated)
-}
-
 const pressEnter = (value, rows, setTmpRows) => event => {
   if (event.keyCode === 13) {
     search(value, rows, setTmpRows)()
@@ -51,40 +42,26 @@ const pressEnter = (value, rows, setTmpRows) => event => {
 }
 
 const search = (value, rows, setTmpRows) => _ => {
-  const newRows = rows.filter(row => row.title.toLowerCase().includes(value))
+  const newRows = rows.filter(row => row.title.toLowerCase().includes(value.toLowerCase()))
   setTmpRows(newRows)
 }
 
-const TabContent = ({ QUERY, queryName, tabIndex, history }) => {
+const TabContent = ({ rows, refetch, showPublishButton, history }) => {
+  const redirectToNewDraft = () => history.push('/admin/newDraft')
   const [filterValue, setFilterValue] = useState('')
   const [tmpRows, setTmpRows] = useState(undefined)
-  const [rows, setRows] = useState(undefined)
-  const {data, loading, refetch} = useQuery(QUERY)
-  const redirectToNewDraft = () => history.push('/admin/newDraft')
-
+  
   useEffect(() => {
     if (!filterValue && !!rows) {
       setTmpRows(rows)
     }
-
-    refetch()
     
-    if (!!data.drafts || !!data.posts) {
-      formatObjectRows(data[`${queryName}`], setRows, setTmpRows)
-    }
-
     if (!!rows) {
       search(filterValue, rows, setTmpRows)
     }
-  }, [filterValue, data, tabIndex])
+  }, [filterValue, rows])  
 
-
-  if (loading) {
-    return <Loading height='auto' /> 
-  }
-  
-  if (!rows) {
-    formatObjectRows(data[`${queryName}`], setRows, setTmpRows)
+  if (!tmpRows) {
     return <Loading height='auto' /> 
   }
 
@@ -106,7 +83,7 @@ const TabContent = ({ QUERY, queryName, tabIndex, history }) => {
           }
         />
         {
-          queryName === 'drafts' &&
+          showPublishButton &&
           <MuiButton variant="contained" color="primary" onClick={redirectToNewDraft}>Novo</MuiButton>
         }
       </CustomFlex>
@@ -124,9 +101,7 @@ const TabContent = ({ QUERY, queryName, tabIndex, history }) => {
 }
 
 TabContent.propTypes = {
-  QUERY: PropTypes.object.isRequired,
-  queryName: PropTypes.string.isRequired,
-  tabIndex: PropTypes.number.isRequired
+  rows: PropTypes.array
 }
 
 export default withRouter(TabContent)

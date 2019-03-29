@@ -107,6 +107,7 @@ const publishDeleteItem = (mutation, item, refetchRows, string) => async () => {
       refetchRows()
     }
   } catch (error) {
+    console.log(error)
     Alert('error', `Error', 'Erro ao ${string} item!`)
   }
 }

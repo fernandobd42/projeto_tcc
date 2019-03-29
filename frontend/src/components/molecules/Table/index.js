@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -7,6 +7,12 @@ import MuiTablePagination from '@material-ui/core/TablePagination'
 
 import TableHeader from './TableHeader'
 import TableBody from './TableBody'
+
+const Container = styled.div`
+  && {
+    height: 593px;
+  }
+`
 
 const MuiPagination = styled(MuiTablePagination)`
   && {
@@ -48,7 +54,7 @@ const Table = ({ headers, rows }) => {
   const { tableOrder, tableOrderBy, tableRowsPerPage, tableRows } = tableBody(order, orderBy, rowsPerPage, rows)
 
   return (
-    <Fragment>
+    <Container>
       <MuiTable>
         <TableHeader 
           headers={headers} 
@@ -80,7 +86,7 @@ const Table = ({ headers, rows }) => {
         onChangePage={handleChangePage(setCurrentPage)}
         labelRowsPerPage='Linhas por página'
       />
-    </Fragment>
+    </Container>
   )
 }
 

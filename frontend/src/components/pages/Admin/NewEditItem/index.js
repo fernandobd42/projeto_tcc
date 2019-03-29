@@ -110,58 +110,58 @@ const NewEditItem = ({ history }) => {
   }
 
   return (
-      <CustomFlex direction='column' justify='start' height='auto'>
-        <Paper elevation={7}> 
-          <MuiAppBar position='static' color='default'>
-            <MuiTabs
-              value={0}
-              indicatorColor='primary'
-              textColor='primary'
-              variant='fullWidth'
-            >
-              <MuiTab label='Adicionar Item' />
-            </MuiTabs>
-          </MuiAppBar>
-          <TabContainer dir={theme.direction}>
-              <Formik
-                initialValues={!!items ? items : initialValues}
-                validationSchema={validationSchema}
-                onSubmit={submit(mutation, redirectToPublications, msgSucesso)}
-              > 
-              {({ onSubmit }) => (
-                <Form>
-                  <FormFields>
-                    <FormikField
-                      required
-                      name='title'
-                      label='Título'
-                      placeholder='Título da Publicação'
-                      component={InputField}
-                    />
-                    <FormikField
-                      required
-                      name='content'
-                      label='Conteúdo'
-                      component={InputField}
-                      multiline={true}
-                      rows={5}
-                      rowsMax={20}
-                    />
-                  </FormFields>
-                  <CustomButton type='submit' variant='outlined' color='primary' onClick={onSubmit}>
-                    Adicionar
+    <CustomFlex direction='column' justify='start' height='auto'>
+      <Paper elevation={7}> 
+        <MuiAppBar position='static' color='default'>
+          <MuiTabs
+            value={0}
+            indicatorColor='primary'
+            textColor='primary'
+            variant='fullWidth'
+          >
+            <MuiTab label='Adicionar Item' />
+          </MuiTabs>
+        </MuiAppBar>
+        <TabContainer dir={theme.direction}>
+            <Formik
+              initialValues={!!items ? items : initialValues}
+              validationSchema={validationSchema}
+              onSubmit={submit(mutation, redirectToPublications, msgSucesso)}
+            > 
+            {({ onSubmit }) => (
+              <Form>
+                <FormFields>
+                  <FormikField
+                    required
+                    name='title'
+                    label='Título'
+                    placeholder='Título da Publicação'
+                    component={InputField}
+                  />
+                  <FormikField
+                    required
+                    name='content'
+                    label='Conteúdo'
+                    component={InputField}
+                    multiline={true}
+                    rows={5}
+                    rowsMax={20}
+                  />
+                </FormFields>
+                <CustomButton type='submit' variant='outlined' color='primary' onClick={onSubmit}>
+                  Adicionar
+                </CustomButton>
+                <Footer>
+                  <CustomButton type='button' color='primary' onClick={redirectToPublications}>
+                    Voltar
                   </CustomButton>
-                  <Footer>
-                    <CustomButton type='button' color='primary' onClick={redirectToPublications}>
-                      Voltar
-                    </CustomButton>
-                  </Footer>
-                </Form>
-              )}
-              </Formik>
-          </TabContainer>
-        </Paper>
-      </CustomFlex>
+                </Footer>
+              </Form>
+            )}
+            </Formik>
+        </TabContainer>
+      </Paper>
+    </CustomFlex>
   )
 }
 
