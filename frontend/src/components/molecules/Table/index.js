@@ -10,7 +10,7 @@ import TableBody from './TableBody'
 
 const Container = styled.div`
   && {
-    height: 593px;
+    min-height: 593px;
   }
 `
 
