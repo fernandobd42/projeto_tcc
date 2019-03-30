@@ -18,7 +18,7 @@ const PostsTab = ({ tabIndex }) => {
   const [rows, setRows] = useState(undefined)
 
   useEffect(() => {
-    if (!loading && data) {
+    if (!loading && !!data.posts) {
       formatObjectRows(data.posts, setRows)
     }
 

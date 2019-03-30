@@ -18,7 +18,7 @@ const DraftsTab = ({ tabIndex }) => {
   const [rows, setRows] = useState(undefined)
 
   useEffect(() => {
-    if (!loading && data) {
+    if (!loading && !!data.drafts) {
       formatObjectRows(data.drafts, setRows)
     }
 
