@@ -14,7 +14,7 @@ const formatObjectRows = (rows, setRows) => {
 }
 
 const DraftsTab = ({ tabIndex }) => {
-  const { data, loading, refetch } = useQuery(DRAFTS_QUERY)
+  const { data, loading, refetch } = useQuery(DRAFTS_QUERY, { notifyOnNetworkStatusChange: true })
   const [rows, setRows] = useState(undefined)
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const DraftsTab = ({ tabIndex }) => {
   }, [tabIndex, data])
 
   if (loading) {
-    return <Loading height='auto' />
+    return <Loading height='618px'/>
   }
 
   if (!!Object.keys(data).length && !rows)  {

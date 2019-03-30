@@ -4,6 +4,7 @@ import * as R from 'ramda'
 
 import POSTS_QUERY from './Query'
 
+import Loading from 'components/atoms/Loading'
 import TabContent from 'components/organisms/TabContent'
 
 const formatObjectRows = (rows, setRows) => {
@@ -13,7 +14,7 @@ const formatObjectRows = (rows, setRows) => {
 }
 
 const PostsTab = ({ tabIndex }) => {
-  const { data, loading, refetch } = useQuery(POSTS_QUERY)
+  const { data, loading, refetch } = useQuery(POSTS_QUERY, { notifyOnNetworkStatusChange: true })
   const [rows, setRows] = useState(undefined)
 
   useEffect(() => {
@@ -25,6 +26,10 @@ const PostsTab = ({ tabIndex }) => {
       refetch()
     }
   }, [tabIndex, data])
+
+  if (loading) {
+    return <Loading height='618px' />
+  }
 
   if (!!Object.keys(data).length && !rows)  {
     formatObjectRows(data.posts, setRows)
