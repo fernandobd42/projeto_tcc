@@ -9,7 +9,7 @@ const Alert = (type, title, text) => (
     title: title,
     text: text,
     type: type,
-    timer: 5000,
+    timer: 3000,
     confirmButtonText: 'Fechar',
     confirmButtonColor: theme.palette.primary.main,
   })

@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import MuiPaper from '@material-ui/core/Paper'
-import Flex from '../Flex';
-
 
 const CustomPaper = styled(MuiPaper)`
 && {
@@ -37,10 +35,9 @@ const Paper = ({ children, elevation }) => (
   </CustomPaper>
 )
 
-Flex.PropTypes = {
+Paper.propTypes = {
+  children: PropTypes.any,
   elevation: PropTypes.number
 }
-
-
 
 export default Paper;
