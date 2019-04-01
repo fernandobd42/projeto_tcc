@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-apollo-hooks' 
-import * as R from 'ramda'
 
 import styled from 'styled-components'
 
@@ -34,10 +33,8 @@ const Feed = () => {
     return <Loading/>
   }
 
-  console.log(rows)
-
   return(
-    <CustomFlex direction="column" height='auto'>
+    <CustomFlex direction='column' height='auto'>
       {
         rows.map(row => (
           <PostCard 

@@ -126,7 +126,7 @@ const submit = (mutation, redirectToLogin) => async ({ email, password, name }, 
   setSubmitting(false)
 }
 
-const handlingTypePassword = (typePassword, setTypePassword, setTooltipPassword) => {
+const handlingTypePassword = (typePassword, setTypePassword, setTooltipPassword) => () => {
   if (typePassword === 'text') {
     setTypePassword('password')
     setTooltipPassword('Mostrar senha')
@@ -147,7 +147,7 @@ const LockIconComponent = ({ type }) => {
 const Register = ({ history }) => {
   const [typePassword, setTypePassword] = useState('password')
   const [tooltipPassword, setTooltipPassword] = useState('Mostrar senha')
-  const redirectToLogin = () => history.push('/auth/login')
+  const redirectToLogin = () => () => history.push('/auth/login')
 
   return (
     <Flex>
@@ -188,7 +188,7 @@ const Register = ({ history }) => {
                   component={InputField}
                   endIcon={
                     <MuiTooltip title={tooltipPassword} aria-label={tooltipPassword}>
-                      <MuiIconButton onClick={() => handlingTypePassword(typePassword, setTypePassword, setTooltipPassword)}>
+                      <MuiIconButton onClick={handlingTypePassword(typePassword, setTypePassword, setTooltipPassword)}>
                         <LockIconComponent type={typePassword} />
                       </MuiIconButton>
                     </MuiTooltip>
@@ -207,7 +207,7 @@ const Register = ({ history }) => {
                 Cadastrar
               </CustomButton>
               <Footer>
-                <CustomButton type='button' color='primary' onClick={() => redirectToLogin()}>
+                <CustomButton type='button' color='primary' onClick={redirectToLogin}>
                   Entrar
                 </CustomButton>
               </Footer>

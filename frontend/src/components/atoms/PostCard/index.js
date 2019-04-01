@@ -13,10 +13,7 @@ import Typography from '@material-ui/core/Typography'
 const CustomCard = styled(Card)`
   && {
     margin: ${theme.spacing.unit * 2}px 0;
-
-    @media (max-width: 1300px) {
-      width: 600px;
-    }
+    width: 600px;
   
     @media (max-width: 1000px) {
       width: 500px;
