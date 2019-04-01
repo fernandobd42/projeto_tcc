@@ -33,23 +33,27 @@ const UserIcon = styled(MuiIconPersonOutline)`
 
 const CustomPopper = styled(MuiPopper)`
   && {
-    width: 120px;
+    max-width: 140px;
   }
 `
 
-const profileToggle = (openMenu, setOpenMenu) => () => (
+const profileToggle = (openMenu, setOpenMenu, redirect) => () => {
   setOpenMenu(!openMenu)
-)
+
+  if (!!redirect) {
+    redirect()
+  }
+}
 
 const profileClose = (profileAnchorEl, setOpenMenu) => event => {
   if (profileAnchorEl && profileAnchorEl.contains(event.target)) {
     return
   }
 
-  return setOpenMenu(false)
+  setOpenMenu(false)
 }
 
-const logout = (setUser, redirectToLogin) => {
+const logout = (setUser, redirectToLogin) => () => {
   setToken(null)
   setUser(null)
   redirectToLogin()
@@ -63,6 +67,7 @@ const DropdownMenu = ({ history }) => {
 
   const closePopper = () => profileClose(profileAnchorEl, setOpenMenu)
   const redirectToLogin = () => history.push('/auth/login')
+  const redirectToSettings = () => history.push('/admin/settings')
 
   return (
     <>  
@@ -84,12 +89,8 @@ const DropdownMenu = ({ history }) => {
           <MuiPaper>
             <MuiClickAwayListener onClickAway={closePopper()}>
               <MuiMenuList>
-                <MuiMenuItem onClick={event => 
-                  {
-                    closePopper(event)
-                    logout(setUser, redirectToLogin)
-                  }
-                }>Sair</MuiMenuItem>
+                <MuiMenuItem onClick={profileToggle(openMenu, setOpenMenu, redirectToSettings)}>Configurações</MuiMenuItem>
+                <MuiMenuItem onClick={logout(setUser, redirectToLogin)}>Sair</MuiMenuItem>
               </MuiMenuList>
             </MuiClickAwayListener>
           </MuiPaper>
