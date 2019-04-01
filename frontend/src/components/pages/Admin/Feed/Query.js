@@ -6,6 +6,7 @@ const ALL_POSTS_QUERY = gql`
       id
       title
       content
+      updatedAt
     }
   }
 `

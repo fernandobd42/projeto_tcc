@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery } from 'react-apollo-hooks' 
 
 import styled from 'styled-components'
@@ -21,13 +21,29 @@ const formatObjectRows = (rows, setRows) => {
   setRows(rows)
 }
 
+const formatDateAndTime = date => {
+  const dateFormated = date.split('T').shift().split('-').reverse().join('/')
+  const timeFormated = new Date(date).toTimeString().split(' ').shift()
+
+  return `${dateFormated} ${timeFormated}`
+
+}
+
 const Feed = () => {
-  const { data, loading } = useQuery(ALL_POSTS_QUERY)
+  const { data, loading, refetch } = useQuery(ALL_POSTS_QUERY, { notifyOnNetworkStatusChange: true })
+  const [fetchData, setFetchData] = useState(true)
   const [rows, setRows] = useState(undefined)
 
-  if (!!Object.keys(data).length && !rows)  {
-    formatObjectRows(data.allPosts, setRows)
-  }
+  useEffect(() => {
+    if (!!Object.keys(data).length)  {
+      formatObjectRows(data.allPosts, setRows)
+    }
+
+    if (fetchData) {
+      refetch()
+      setFetchData(false)
+    }
+  }, [data])
 
   if (loading || !rows) {
     return <Loading/>
@@ -41,7 +57,7 @@ const Feed = () => {
             key={row.id}
             title={row.title} 
             content={row.content}
-            date='30/03/2019 05:30'
+            date={formatDateAndTime(row.updatedAt)}
           />
         ))
       }
