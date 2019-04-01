@@ -18,7 +18,7 @@ const DraftsTab = ({ tabIndex }) => {
   const [rows, setRows] = useState(undefined)
 
   useEffect(() => {
-    if (!loading && !!data.drafts) {
+    if (!!Object.keys(data).length) {
       formatObjectRows(data.drafts, setRows)
     }
 
@@ -27,12 +27,8 @@ const DraftsTab = ({ tabIndex }) => {
     }
   }, [tabIndex, data])
 
-  if (loading) {
+  if (loading || !rows) {
     return <Loading height='618px'/>
-  }
-
-  if (!!Object.keys(data).length && !rows)  {
-    formatObjectRows(data.drafts, setRows)
   }
 
   return <TabContent rows={rows} refetch={refetch} showPublishButton={true} />

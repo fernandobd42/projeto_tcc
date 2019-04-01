@@ -12,7 +12,6 @@ import MuiToolbar from '@material-ui/core/Toolbar'
 import MuiTypography from '@material-ui/core/Typography'
 import MuiButton from '@material-ui/core/Button'
 
-
 const CustomButton = styled(MuiButton)`
   && {
     ${props =>
@@ -42,7 +41,7 @@ const AppBar = ({ history }) => {
   const route = history.location.pathname.split('/').pop()
 
   return (
-    <MuiAppBar position='absolute'>
+    <MuiAppBar position='fixed'>
       <MuiToolbar>
         <Flex height='auto' justify='flex-start' flex={1}>
           <CustomButton onClick={redirectToFeed} disabled={route === 'feed'}>
@@ -61,7 +60,6 @@ const AppBar = ({ history }) => {
       </MuiToolbar>
     </MuiAppBar>
   )
-
 }
 
 export default withRouter(AppBar)

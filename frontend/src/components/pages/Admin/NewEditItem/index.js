@@ -119,7 +119,7 @@ const NewEditItem = ({ history }) => {
             textColor='primary'
             variant='fullWidth'
           >
-            <MuiTab label='Adicionar Item' />
+            <MuiTab label={`${id.length >= 25 ? 'Editar' : 'Adicionar'} Item`} />
           </MuiTabs>
         </MuiAppBar>
         <TabContainer dir={theme.direction}>
@@ -149,7 +149,7 @@ const NewEditItem = ({ history }) => {
                   />
                 </FormFields>
                 <CustomButton type='submit' variant='outlined' color='primary' onClick={onSubmit}>
-                  Adicionar
+                  {id.length >= 25 ? 'Editar' : 'Adicionar'}
                 </CustomButton>
                 <Footer>
                   <CustomButton type='button' color='primary' onClick={redirectToPublications}>

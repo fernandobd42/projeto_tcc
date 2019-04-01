@@ -90,7 +90,7 @@ const TabContent = ({ rows, refetch, showPublishButton, history }) => {
 
       {
         !tmpRows.length
-        ? <MuiTypography variant='h6'>Nenhum item encontrado</MuiTypography>
+        ? <MuiTypography variant='h6'>Nenhum item {showPublishButton ? 'adicionado' : 'publicado'}</MuiTypography>
         : <Table
             headers={headers}
             rows={tmpRows}
@@ -101,7 +101,9 @@ const TabContent = ({ rows, refetch, showPublishButton, history }) => {
 }
 
 TabContent.propTypes = {
-  rows: PropTypes.array
+  rows: PropTypes.array.isRequired,
+  refetch: PropTypes.func.isRequired,
+  rshowPublishButtonefetch: PropTypes.bool,
 }
 
 export default withRouter(TabContent)

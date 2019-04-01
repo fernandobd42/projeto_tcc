@@ -18,7 +18,7 @@ const PostsTab = ({ tabIndex }) => {
   const [rows, setRows] = useState(undefined)
 
   useEffect(() => {
-    if (!loading && !!data.posts) {
+    if (!!Object.keys(data).length) {
       formatObjectRows(data.posts, setRows)
     }
 
@@ -27,12 +27,8 @@ const PostsTab = ({ tabIndex }) => {
     }
   }, [tabIndex, data])
 
-  if (loading) {
+  if (loading || !rows) {
     return <Loading height='618px' />
-  }
-
-  if (!!Object.keys(data).length && !rows)  {
-    formatObjectRows(data.posts, setRows)
   }
 
   return <TabContent rows={rows} refetch={refetch} />

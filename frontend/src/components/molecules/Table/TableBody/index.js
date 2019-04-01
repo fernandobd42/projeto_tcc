@@ -107,7 +107,9 @@ const publishDeleteItem = (mutation, item, refetchRows, string) => async () => {
       refetchRows()
     }
   } catch (error) {
-    Alert('error', `Error', 'Erro ao ${string} item!`)
+    if (!!error.networkError) {
+      Alert('error', `Error', 'Erro ao ${string} item!`)
+    }
   }
 }
 
@@ -138,9 +140,9 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
                 )
               }
               <Mutation mutation={PUBLISH}>
-                {(publish, {loading: loadingPublish }) => (
+                {(publish, { loading: loadingPublish }) => (
                 <Mutation mutation={DELETE_POST}>
-                  {(deletePost, {loading: loadingDeletePost }) => (
+                  {(deletePost, { loading: loadingDeletePost }) => (
                   <CustomTableCell key='options' align='right' disabled={loadingPublish || loadingDeletePost}>
                     <Flex height='auto' justify="flex-end">
                       { 
