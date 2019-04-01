@@ -1,12 +1,12 @@
 import { getUserId, Context } from '../utils'
 
 export const Query = {
-  allPosts(parent, args, ctx: Context) {
+  allPosts(parent, { first, skip }, ctx: Context) {
     const where = {
       published: true,
     }
 
-    return ctx.prisma.posts({ where })
+    return ctx.prisma.posts({ where, first, skip, orderBy: "updatedAt_DESC" })
   },
 
   posts(parent, args, ctx: Context) {

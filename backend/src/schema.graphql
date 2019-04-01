@@ -1,5 +1,5 @@
 type Query {
-  allPosts: [Post!]!
+  allPosts(first: Int, skip: Int): [Post!]!
   posts: [Post!]!
   drafts: [Post!]!
   post(id: ID!): Post!
@@ -37,4 +37,6 @@ type Post {
   title: String!
   content: String!
   author: User!
+  createdAt: String
+  updatedAt: String
 }
