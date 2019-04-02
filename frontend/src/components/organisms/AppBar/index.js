@@ -4,13 +4,13 @@ import { withRouter } from 'react-router-dom'
 
 import theme from 'app/theme'
 
-import DropdownMenu from 'components/molecules/DropdownMenu'
-import Flex from 'components/atoms/Flex'
-
 import MuiAppBar from '@material-ui/core/AppBar'
 import MuiToolbar from '@material-ui/core/Toolbar'
 import MuiTypography from '@material-ui/core/Typography'
 import MuiButton from '@material-ui/core/Button'
+
+import DropdownMenu from 'components/molecules/DropdownMenu'
+import Flex from 'components/atoms/Flex'
 
 const CustomButton = styled(MuiButton)`
   && {

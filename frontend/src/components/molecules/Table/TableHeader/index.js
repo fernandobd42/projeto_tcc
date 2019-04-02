@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import theme from 'app/theme'
+
 import MuiTableHead from '@material-ui/core/TableHead'
 import MuiTableRow from '@material-ui/core/TableRow'
 import MuiTableCell from '@material-ui/core/TableCell'
 import MuiTooltip from '@material-ui/core/Tooltip'
 import MuiTableSortLabel from '@material-ui/core/TableSortLabel'
-
-import theme from 'app/theme'
 
 const CustomTableHeader = styled(MuiTableHead)`
   && {

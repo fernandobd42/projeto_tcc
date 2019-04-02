@@ -3,12 +3,8 @@ import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 
-import { ContextAPI } from 'app/store'
-
 import theme from 'app/theme'
-
-import InputField from 'components/atoms/InputField'
-import Alert from 'components/atoms/Alert'
+import { ContextAPI } from 'app/store'
 
 import MuiButton from '@material-ui/core/Button'
 import MuiIconButton from '@material-ui/core/IconButton'
@@ -16,6 +12,8 @@ import MuiTooltip from '@material-ui/core/Tooltip'
 import MuiIconLock from '@material-ui/icons/Lock'
 import MuiIconLockOpen from '@material-ui/icons/LockOpen'
 
+import InputField from 'components/atoms/InputField'
+import Alert from 'components/atoms/Alert'
 
 const Form = styled(FormikForm)`
   && {

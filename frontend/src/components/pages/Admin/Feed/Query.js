@@ -7,6 +7,9 @@ const ALL_POSTS_QUERY = gql`
       title
       content
       updatedAt
+      author {
+        name
+      }
     }
   }
 `

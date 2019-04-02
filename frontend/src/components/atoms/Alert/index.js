@@ -1,6 +1,5 @@
-import Swal from 'sweetalert2' 
-
 import PropTypes from 'prop-types'
+import Swal from 'sweetalert2' 
 
 import theme from 'app/theme'
 

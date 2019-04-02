@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react'
 import SwipeableViews from 'react-swipeable-views'
-
 import styled from 'styled-components'
+
 import theme from 'app/theme'
 
 import MuiAppBar from '@material-ui/core/AppBar'
@@ -48,10 +48,10 @@ const Tabs = () => {
         index={tabIndex}
         onChangeIndex={handleChangeIndex(setTabIndex)}
       >
-        <TabContainer dir={theme.direction}>
+        <TabContainer direction={theme.direction}>
           <DraftsTab tabIndex={tabIndex} />
         </TabContainer>
-        <TabContainer dir={theme.direction}>
+        <TabContainer direction={theme.direction}>
           <PostsTab tabIndex={tabIndex} />
         </TabContainer>
       </CustomSwipeableViews>

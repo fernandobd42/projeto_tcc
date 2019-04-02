@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import styled from 'styled-components'
 
 import theme from 'app/theme'
@@ -40,18 +39,29 @@ const CustomContent = styled(Typography)`
   }
 `
 
-const PostCard = ({ title, content, date }) => (
+const formatDateAndTime = date => {
+  const dateFormated = date.split('T').shift().split('-').reverse().join('/')
+  const timeFormated = new Date(date).toTimeString().split(' ').shift()
+
+  return `${dateFormated} ${timeFormated}`
+
+}
+
+const PostCard = ({ row: { id, title, content, updatedAt, author } }) => (
   <CustomCard>
     <CardActionArea>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2" color="primary">
+        <Typography gutterBottom variant='h5' component='h2' color='primary'>
           { title }
         </Typography>
-        <CustomContent gutterBottom component="p">
+        <CustomContent gutterBottom component='p'>
          { content }
         </CustomContent>
-        <Typography variant="caption">
-         { date }
+        <Typography variant='caption'>
+         { formatDateAndTime(updatedAt) }
+        </Typography>
+        <Typography variant='caption' align='right'>
+          { author.name }
         </Typography>
       </CardContent>
     </CardActionArea>
@@ -59,9 +69,7 @@ const PostCard = ({ title, content, date }) => (
 )
 
 PostCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  row: PropTypes.object.isRequired,
 }
 
 export default PostCard

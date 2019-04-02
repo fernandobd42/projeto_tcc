@@ -4,15 +4,9 @@ import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 
-import { ContextAPI, setToken } from 'app/store'
-
-import LOGIN from './Mutation'
-
 import theme from 'app/theme'
-
-import InputField from 'components/atoms/InputField'
-import Flex from 'components/atoms/Flex'
-import Alert from 'components/atoms/Alert'
+import { ContextAPI, setToken } from 'app/store'
+import LOGIN from './Mutation'
 
 import MuiPaper from '@material-ui/core/Paper'
 import MuiButton from '@material-ui/core/Button'
@@ -21,6 +15,10 @@ import MuiIconButton from '@material-ui/core/IconButton'
 import MuiTooltip from '@material-ui/core/Tooltip'
 import MuiIconLock from '@material-ui/icons/Lock'
 import MuiIconLockOpen from '@material-ui/icons/LockOpen'
+
+import InputField from 'components/atoms/InputField'
+import Flex from 'components/atoms/Flex'
+import Alert from 'components/atoms/Alert'
 
 const Paper = styled(MuiPaper)`
   && {
@@ -187,7 +185,7 @@ const Login = ({ history }) => {
                 Entrar
               </CustomButton>
               <Footer>
-                <CustomButton type='button' color='primary' onClick={() => redirectToRegister()}>
+                <CustomButton type='button' color='primary' onClick={redirectToRegister}>
                   Cadastrar
                 </CustomButton>
               </Footer>

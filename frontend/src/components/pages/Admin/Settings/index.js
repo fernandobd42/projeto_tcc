@@ -3,17 +3,17 @@ import styled from 'styled-components'
 
 import theme from 'app/theme'
 
-import Flex from 'components/atoms/Flex'
-import Paper from 'components/atoms/Paper'
-import PersonalTab from './PersonalTab'
-import PasswordTab from './PasswordTab'
-
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Lock from '@material-ui/icons/Lock'
+
+import Flex from 'components/atoms/Flex'
+import Paper from 'components/atoms/Paper'
+import PersonalTab from './PersonalTab'
+import PasswordTab from './PasswordTab'
 
 const CustomFlex = styled(Flex)`
   && {

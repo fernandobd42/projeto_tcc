@@ -5,10 +5,9 @@ import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 
+import theme from 'app/theme'
 import { CREATE_DRAFT, UPDATE_ITEM } from './Mutation'
 import GET_ONE_ITEM from './Query'
-
-import theme from 'app/theme'
 
 import MuiAppBar from '@material-ui/core/AppBar'
 import MuiTabs from '@material-ui/core/Tabs'
@@ -122,7 +121,7 @@ const NewEditItem = ({ history }) => {
             <MuiTab label={`${id.length >= 25 ? 'Editar' : 'Adicionar'} Item`} />
           </MuiTabs>
         </MuiAppBar>
-        <TabContainer dir={theme.direction}>
+        <TabContainer>
             <Formik
               initialValues={!!items ? items : initialValues}
               validationSchema={validationSchema}

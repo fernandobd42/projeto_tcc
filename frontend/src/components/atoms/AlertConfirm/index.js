@@ -1,6 +1,5 @@
-import Swal from 'sweetalert2' 
-
 import PropTypes from 'prop-types'
+import Swal from 'sweetalert2' 
 
 import theme from 'app/theme'
 
@@ -29,8 +28,6 @@ const AlertConfirm = (msgsucesso, action) => (
 )
 
 AlertConfirm.propTypes = {
-  title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
   msgsucesso: PropTypes.string.isRequired,
   action: PropTypes.func.isRequired
 }

@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import MuiTextField from '@material-ui/core/TextField'
-import MuiInputAdornment from '@material-ui/core/InputAdornment'
-
 import styled, { css } from 'styled-components'
 
 import theme from 'app/theme'
+
+import MuiTextField from '@material-ui/core/TextField'
+import MuiInputAdornment from '@material-ui/core/InputAdornment'
 
 const StyledInput = styled(MuiTextField)`
   && {
@@ -56,8 +55,6 @@ const Input = ({ endIcon, ...props }) => {
     }
   }
   return <StyledInput {...props} />
-
-
 } 
 
 Input.defaultProps = {
@@ -74,8 +71,6 @@ Input.defaultProps = {
 Input.propTypes = {
   ...MuiTextField.propTypes,
   endIcon: PropTypes.node,
-  variant: PropTypes.string,
-  padding: PropTypes.bool
 }
 
 export default Input

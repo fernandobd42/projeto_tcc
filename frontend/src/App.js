@@ -3,7 +3,6 @@ import { Switch, Route, Redirect} from 'react-router-dom'
 
 import apolloClient from 'app/apolloClient'
 import { ContextAPI } from 'app/store'
-
 import USER from './Query'
 
 import Loading from 'components/atoms/Loading'

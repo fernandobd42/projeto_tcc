@@ -1,11 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import ReactLoading from 'react-loading'
 
-import Flex from 'components/atoms/Flex'
-
 import theme from 'app/theme'
+
+import Flex from 'components/atoms/Flex'
 
 const Loading = ({ height }) => (
   <Flex height={height}>

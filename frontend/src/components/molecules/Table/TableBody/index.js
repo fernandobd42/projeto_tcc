@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import styled, { css } from 'styled-components'
 
-import {PUBLISH, DELETE_POST} from './Mutation'
+import theme from 'app/theme'
+import { PUBLISH, DELETE_POST } from './Mutation'
 
 import MuiTableBody from '@material-ui/core/TableBody'
 import MuiTableRow from '@material-ui/core/TableRow'
@@ -17,8 +18,6 @@ import Flex from 'components/atoms/Flex'
 import Alert from 'components/atoms/Alert'
 import AlertConfirm from 'components/atoms/AlertConfirm'
 import { ContextAPI } from 'components/organisms/TabContent'
-
-import theme from 'app/theme'
 
 const CustomTableBody = styled(MuiTableBody)`
   && {

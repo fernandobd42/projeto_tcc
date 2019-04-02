@@ -1,11 +1,10 @@
 import React, { Suspense } from 'react'
 import PropTypes from 'prop-types'
-
 import styled from 'styled-components'
 
-import Loading from 'components/atoms/Loading'
-
 import theme from 'app/theme'
+
+import Loading from 'components/atoms/Loading'
 
 const Wrapper = styled.div`
   display: flex;

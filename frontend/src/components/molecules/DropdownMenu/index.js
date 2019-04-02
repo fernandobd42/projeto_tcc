@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, Fragment } from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
 import theme from 'app/theme'
-
 import { ContextAPI, setToken } from 'app/store'
 
 import MuiButton from '@material-ui/core/Button'
@@ -70,34 +69,34 @@ const DropdownMenu = ({ history }) => {
   const redirectToSettings = () => history.push('/admin/settings')
 
   return (
-    <>  
-    <MuiButton 
-      onClick={profileToggle(openMenu, setOpenMenu)} 
-      buttonRef={setProfileAnchorEl}
-    >
-      <UserName variant='subtitle1'>
-        {!!user && user.name.split(' ')[0]}
-      </UserName>
-      <UserIcon />
-    </MuiButton>
-    <CustomPopper open={openMenu} anchorEl={profileAnchorEl} transition disablePortal>
-      {({ TransitionProps, placement }) => (
-        <MuiGrow
-          {...TransitionProps}
-          style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-        >
-          <MuiPaper>
-            <MuiClickAwayListener onClickAway={closePopper()}>
-              <MuiMenuList>
-                <MuiMenuItem onClick={profileToggle(openMenu, setOpenMenu, redirectToSettings)}>Configurações</MuiMenuItem>
-                <MuiMenuItem onClick={logout(setUser, redirectToLogin)}>Sair</MuiMenuItem>
-              </MuiMenuList>
-            </MuiClickAwayListener>
-          </MuiPaper>
-        </MuiGrow>
-      )}
-    </CustomPopper>
-  </>
+    <Fragment>  
+      <MuiButton 
+        onClick={profileToggle(openMenu, setOpenMenu)} 
+        buttonRef={setProfileAnchorEl}
+      >
+        <UserName variant='subtitle1'>
+          {!!user && user.name.split(' ')[0]}
+        </UserName>
+        <UserIcon />
+      </MuiButton>
+      <CustomPopper open={openMenu} anchorEl={profileAnchorEl} transition disablePortal>
+        {({ TransitionProps, placement }) => (
+          <MuiGrow
+            {...TransitionProps}
+            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+          >
+            <MuiPaper>
+              <MuiClickAwayListener onClickAway={closePopper()}>
+                <MuiMenuList>
+                  <MuiMenuItem onClick={profileToggle(openMenu, setOpenMenu, redirectToSettings)}>Configurações</MuiMenuItem>
+                  <MuiMenuItem onClick={logout(setUser, redirectToLogin)}>Sair</MuiMenuItem>
+                </MuiMenuList>
+              </MuiClickAwayListener>
+            </MuiPaper>
+          </MuiGrow>
+        )}
+      </CustomPopper>
+    </Fragment>
   )
 }
 

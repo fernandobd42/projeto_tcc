@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { getIn } from 'formik'
 
 import Input from 'components/atoms/Input'

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import { ContextAPI } from 'app/store'

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery } from 'react-apollo-hooks' 
-
 import styled from 'styled-components'
 
 import theme from 'app/theme'
-
 import ALL_POSTS_QUERY from './Query'
 
 import Loading from 'components/atoms/Loading'
@@ -19,14 +17,6 @@ const CustomFlex = styled(Flex)`
 
 const formatObjectRows = (rows, setRows) => {
   setRows(rows)
-}
-
-const formatDateAndTime = date => {
-  const dateFormated = date.split('T').shift().split('-').reverse().join('/')
-  const timeFormated = new Date(date).toTimeString().split(' ').shift()
-
-  return `${dateFormated} ${timeFormated}`
-
 }
 
 const Feed = () => {
@@ -55,9 +45,7 @@ const Feed = () => {
         rows.map(row => (
           <PostCard 
             key={row.id}
-            title={row.title} 
-            content={row.content}
-            date={formatDateAndTime(row.updatedAt)}
+            row={row}
           />
         ))
       }

@@ -4,13 +4,8 @@ import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 
-import SIGN_UP from './Mutation'
-
 import theme from 'app/theme'
-
-import InputField from 'components/atoms/InputField'
-import Flex from 'components/atoms/Flex'
-import Alert from 'components/atoms/Alert'
+import SIGN_UP from './Mutation'
 
 import MuiPaper from '@material-ui/core/Paper'
 import MuiButton from '@material-ui/core/Button'
@@ -20,6 +15,9 @@ import MuiTooltip from '@material-ui/core/Tooltip'
 import MuiIconLock from '@material-ui/icons/Lock'
 import MuiIconLockOpen from '@material-ui/icons/LockOpen'
 
+import InputField from 'components/atoms/InputField'
+import Flex from 'components/atoms/Flex'
+import Alert from 'components/atoms/Alert'
 
 const Paper = styled(MuiPaper)`
   && {
@@ -147,7 +145,7 @@ const LockIconComponent = ({ type }) => {
 const Register = ({ history }) => {
   const [typePassword, setTypePassword] = useState('password')
   const [tooltipPassword, setTooltipPassword] = useState('Mostrar senha')
-  const redirectToLogin = () => () => history.push('/auth/login')
+  const redirectToLogin = () => history.push('/auth/login')
 
   return (
     <Flex>
