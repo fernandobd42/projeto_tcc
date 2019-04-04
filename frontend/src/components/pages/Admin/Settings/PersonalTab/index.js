@@ -1,9 +1,11 @@
 import React, { useContext, useState } from 'react'
+import { useMutation } from 'react-apollo-hooks'
 import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 
 import theme from 'app/theme'
+import UPDATE_USER from './Mutation'
 import { ContextAPI } from 'app/store'
 
 import MuiButton from '@material-ui/core/Button'
@@ -34,7 +36,6 @@ const CustomButton = styled(MuiButton)`
 `
 
 const initialValues = {
-  id: '',
   name: '',
   email: '',
   password: ''
@@ -56,25 +57,35 @@ const validationSchema = Yup.object().shape({
     .min(8, 'Senha deve ter no mínimo 8 caracteres'),
 })
 
-const submit = mutation => async ({ id, name, email, password }, { setSubmitting }) => {
+const submit = (updateUser, setUser, user, setLoading) => async ({ name, email, password }, { setSubmitting }) => {
+  setLoading(true)
+  const currentEmail = user.email
+  
   try {
-    await mutation({
+    const { data } = await updateUser({
       variables:
       {
-        id,
         name,
         email,
+        currentEmail,
         password
       }
     })
 
+    setUser(data.updateUser)
+    user.password = ''
     Alert('success', 'Sucesso', 'Dados pessoais alterados com sucesso!')
   } catch (error) {
     if (!!error.networkError) {
       Alert('error', 'Error', 'Servidor fora do ar!')
     }
+
+    if (error.message.includes('Invalid password')) {
+      Alert('error', 'Error', 'Senha incorreta, tente novamente com outra senha.')
+    }
   }
   
+  setLoading(false)
   setSubmitting(false)
 }
 
@@ -97,15 +108,18 @@ const LockIconComponent = ({ type }) => {
 }
 
 const PersonalTab = () => {
+  const [user, setUser] = useContext(ContextAPI)
+  const updateUser = useMutation(UPDATE_USER)
+  const [loading, setLoading] = useState(false)
   const [typePassword, setTypePassword] = useState('password')
   const [tooltipPassword, setTooltipPassword] = useState('Mostrar senha')
-  const [user] = useContext(ContextAPI)
+  user.password = ''
 
   return (
     <Formik
       initialValues={!!user ? user : initialValues}
       validationSchema={validationSchema}
-      onSubmit={() => console.log('click')}
+      onSubmit={submit(updateUser, setUser, user, setLoading)}
     > 
     {({ onSubmit }) => (
       <Form>
@@ -113,7 +127,7 @@ const PersonalTab = () => {
           <FormikField
             required
             name='name'
-            label='Name'
+            label='Nome'
             placeholder='Fulano de tal'
             component={InputField}
           />
@@ -140,7 +154,7 @@ const PersonalTab = () => {
             }
           />
         </FormFields>
-        <CustomButton type='submit' variant='outlined' color='primary' onClick={onSubmit}>
+        <CustomButton type='submit' variant='outlined' color='primary' disabled={loading} onClick={onSubmit}>
           Alterar
         </CustomButton>
       </Form>
