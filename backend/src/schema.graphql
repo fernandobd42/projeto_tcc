@@ -13,6 +13,8 @@ type Mutation {
   updatePost(id: String!, title: String!, content: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
+  updateUser(name: String!, email: String!, currentEmail: String!, password: String!): User!
+  updatePassword(currentEmail: String!, currentPassword: String!, newPassword: String!): User!
 }
 
 type Subscription {
