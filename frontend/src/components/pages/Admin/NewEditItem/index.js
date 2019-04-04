@@ -1,6 +1,5 @@
 import React from 'react'
-import { useMutation } from 'react-apollo-hooks'
-import { useQuery } from 'react-apollo-hooks'
+import { useQuery, useMutation } from 'react-apollo-hooks'
 import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
@@ -94,7 +93,7 @@ const NewEditItem = ({ history }) => {
   const createDraft = useMutation(CREATE_DRAFT);
   const updatePost = useMutation(UPDATE_ITEM);
   const id = history.location.pathname.split('/').pop()
-  let result, items, mutation, msgSucesso
+  let result, item, mutation, msgSucesso
 
   if (id.length >= 25) {
     result = useQuery(GET_ONE_ITEM, { variables: { id }})
@@ -102,7 +101,7 @@ const NewEditItem = ({ history }) => {
     msgSucesso = 'Item editado com sucesso!'
       
     if (!result || result.loading) return <Loading />
-    items = result.data.post
+    item = result.data.post
   } else {
     mutation = createDraft
     msgSucesso = 'Rascunho adicionado com sucesso!'
@@ -123,7 +122,7 @@ const NewEditItem = ({ history }) => {
         </MuiAppBar>
         <TabContainer>
             <Formik
-              initialValues={!!items ? items : initialValues}
+              initialValues={!!item ? item : initialValues}
               validationSchema={validationSchema}
               onSubmit={submit(mutation, redirectToPublications, msgSucesso)}
             > 
