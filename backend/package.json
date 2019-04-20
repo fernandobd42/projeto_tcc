@@ -1,5 +1,7 @@
 {
   "name": "backend",
+  "version": "0.1.0",
+  "license": "MIT",
   "scripts": {
     "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
     "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
