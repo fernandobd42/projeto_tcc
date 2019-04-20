@@ -43,4 +43,8 @@ export const Query = {
     const id = getUserId(ctx)
     return ctx.prisma.user({ id })
   },
+
+  async emailAlreadyUsed(parent, { email }, ctx: Context) {
+    return await ctx.prisma.$exists.user({email})
+  }
 }

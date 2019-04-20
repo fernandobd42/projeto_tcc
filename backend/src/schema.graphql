@@ -4,6 +4,7 @@ type Query {
   drafts: [Post!]!
   post(id: ID!): Post!
   me: User!
+  emailAlreadyUsed(email: String): Boolean!
 }
 
 type Mutation {
