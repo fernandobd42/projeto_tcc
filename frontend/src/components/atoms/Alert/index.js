@@ -6,7 +6,7 @@ import theme from 'app/theme'
 const Alert = (type, title, text) => (
   Swal.fire({
     title: title,
-    text: text,
+    html: `<div id='text-alert'>${text}</div>`,
     type: type,
     timer: 3000,
     confirmButtonText: 'Fechar',
