@@ -6,11 +6,11 @@ const emailUsed = email => `{
   emailAlreadyUsed(email: "${email}")
 }`;
 
-describe('Cadastrar Usuário', () => {
-  const name = faker.name.findName()
-  const email = faker.internet.email()
-  const senha = faker.internet.password(10)
+const name = faker.name.findName()
+const email = faker.internet.email()
+const senha = faker.internet.password(10)
 
+describe('Cadastrar Usuário', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/auth/register')
 
@@ -22,16 +22,15 @@ describe('Cadastrar Usuário', () => {
     cy.get('#register').click()
   })
   
-  it('Usuário válido', () => {
+  it('Usuário válido', async () => {
     cy.get('#text-alert').should('contain', 'Cadastro realizado com sucesso!')
-    cy.wait(5000)
-  })
-  
-  it('Usuário inválido', async () => {
-    cy.get('#text-alert').should('contain', 'Este email já está sendo usado.')
-    
+    await cy.wait(5000)
+
     const { emailAlreadyUsed } = await graphql_api(emailUsed(email))
     expect(emailAlreadyUsed).to.be.true
   })
-
+  
+  it('Usuário inválido', () => {
+    cy.get('#text-alert').should('contain', 'Este email já está sendo usado.')
+  })
 })
