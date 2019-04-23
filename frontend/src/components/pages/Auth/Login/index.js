@@ -159,6 +159,7 @@ const Login = ({ history }) => {
             <Form>
               <FormFields>
                 <FormikField
+                  id="email"
                   required
                   name='email'
                   label='Email'
@@ -166,6 +167,7 @@ const Login = ({ history }) => {
                   component={InputField}
                 />
                 <FormikField
+                  id="password"
                   required
                   name='password'
                   type={typePassword}
@@ -174,14 +176,14 @@ const Login = ({ history }) => {
                   component={InputField}
                   endIcon={
                     <MuiTooltip title={tooltipPassword} aria-label={tooltipPassword}>
-                      <MuiIconButton onClick={() => handlingTypePassword(typePassword, setTypePassword, setTooltipPassword)}>
+                      <MuiIconButton id="show-password" onClick={() => handlingTypePassword(typePassword, setTypePassword, setTooltipPassword)}>
                         <LockIconComponent type={typePassword} />
                       </MuiIconButton>
                     </MuiTooltip>
                   }
                 />
               </FormFields>
-              <CustomButton type='submit' variant='outlined' color='primary' disabled={loading} onClick={onSubmit}>
+              <CustomButton id="entrar" type='submit' variant='outlined' color='primary' disabled={loading} onClick={onSubmit}>
                 Entrar
               </CustomButton>
               <Footer>
