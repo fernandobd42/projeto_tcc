@@ -1,4 +1,5 @@
-import { getUserId, Context } from '../utils'
+import * as jwt from 'jsonwebtoken'
+import { getUserId, validateUser, Context } from '../utils'
 
 export const Query = {
   allPosts(parent, { first, skip }, ctx: Context) {
@@ -46,5 +47,11 @@ export const Query = {
 
   async emailAlreadyUsed(parent, { email }, ctx: Context) {
     return await ctx.prisma.$exists.user({email})
+  },
+
+  async token(parent, { email, password }, ctx: Context) {
+    const user = await validateUser(ctx, email, password)
+
+    return jwt.sign({ userId: user.id }, process.env.APP_SECRET)
   }
 }
