@@ -30,10 +30,9 @@ describe('Entrar com Usuário', () => {
       expect(!!token).to.have.true
       expect(token.length).to.be.greaterThan(154)
     })
-   
   })
   
-  it('Usuário inválido', async () => {
+  it('Usuário inválido', () => {
     cy.get('#email').type(emailInvalido)
     cy.get('#password').type(senhaInvalida)
     cy.get('#show-password').click()
@@ -46,7 +45,7 @@ describe('Entrar com Usuário', () => {
     cy.get('#email').type(email)
     cy.get('#entrar').click()
 
-    cy.get('#text-alert').should('contain', 'enha incorreta, tente novamente com outra senha.')
+    cy.get('#text-alert').should('contain', 'Senha incorreta, tente novamente com outra senha.')
     cy.wait(5000)
   })
 })

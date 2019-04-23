@@ -32,5 +32,6 @@ describe('Cadastrar Usuário', () => {
   
   it('Usuário inválido', () => {
     cy.get('#text-alert').should('contain', 'Este email já está sendo usado.')
+    cy.wait(5000)
   })
 })
