@@ -49,7 +49,7 @@ const AppBar = ({ history }) => {
               Página Inicial
             </ButtonText>
           </CustomButton>
-          <CustomButton onClick={redirectToPublications} disabled={route === 'publications'}>
+          <CustomButton id="publicacoes" onClick={redirectToPublications} disabled={route === 'publications'}>
             <ButtonText variant='subtitle1'>
               Publicações
             </ButtonText>

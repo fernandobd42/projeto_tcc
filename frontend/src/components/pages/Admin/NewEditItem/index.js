@@ -130,6 +130,7 @@ const NewEditItem = ({ history }) => {
               <Form>
                 <FormFields>
                   <FormikField
+                    id="title"
                     required
                     name='title'
                     label='Título'
@@ -137,6 +138,7 @@ const NewEditItem = ({ history }) => {
                     component={InputField}
                   />
                   <FormikField
+                    id="content"
                     required
                     name='content'
                     label='Conteúdo'
@@ -146,7 +148,7 @@ const NewEditItem = ({ history }) => {
                     rowsMax={20}
                   />
                 </FormFields>
-                <CustomButton type='submit' variant='outlined' color='primary' onClick={onSubmit}>
+                <CustomButton id="salvar" type='submit' variant='outlined' color='primary' onClick={onSubmit}>
                   {id.length >= 25 ? 'Editar' : 'Adicionar'}
                 </CustomButton>
                 <Footer>
