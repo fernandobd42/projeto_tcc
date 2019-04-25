@@ -53,5 +53,9 @@ export const Query = {
     const user = await validateUser(ctx, email, password)
 
     return jwt.sign({ userId: user.id }, process.env.APP_SECRET)
+  },
+
+  async titleExists(parent, { title }, ctx: Context) {
+    return await ctx.prisma.$exists.post({title})
   }
 }
