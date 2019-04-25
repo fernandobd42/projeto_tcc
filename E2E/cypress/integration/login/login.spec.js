@@ -4,7 +4,7 @@ import { graphql_api } from '../../../utils/graphql-request.service'
 
 const entrar = (email, password) => `{
   token(email: "${email}", password: "${password}")
-}`;
+}`
 
 const email = 'fernando@gmail.com'
 const emailInvalido = faker.internet.email()
@@ -23,13 +23,14 @@ describe('Entrar com Usuário', () => {
     cy.get('#entrar').click()
 
     cy.get('#text-alert').should('contain', 'Login realizado com sucesso!')
-    cy.location("pathname").should("eq", "/admin/feed");
+    cy.location("pathname").should("eq", "/admin/feed")
     cy.wait(5000)
-  
-    graphql_api(entrar(email, senha)).then(({ token }) => {
-      expect(!!token).to.have.true
-      expect(token.length).to.be.greaterThan(154)
-    })
+  })
+
+  it('Validar usuário', async () => {
+    const { token } = await graphql_api(entrar(email, senha))
+    expect(!!token).to.have.true
+    expect(token.length).to.be.greaterThan(154)
   })
   
   it('Usuário inválido', () => {
