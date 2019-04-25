@@ -82,11 +82,7 @@ const initialValues = {
 const validationSchema = Yup.object().shape({
   name: Yup.string()
     .required('Nome e sobrenome é obrigatório')
-    .matches(
-      /^([a-zA-Zà-úÀ-Ú-]+){3,}\s+([a-zA-Zà-úÀ-Ú-]+){2,}\s*([a-zA-Zà-úÀ-Ú-]+)\s*([a-zA-Zà-úÀ-Ú-]+)\s*([a-zA-Zà-úÀ-Ú-]+)*$/, {
-      excludeEmptyString: true,
-      message: 'Prencha ao menos nome e sobrenome'
-    }),
+    .min(8, 'Prencha ao menos nome e sobrenome'),
   email: Yup.string()
     .required('Email é obrigatório')
     .email('Digite um email válido'),
