@@ -8,7 +8,7 @@ const emailUsed = email => `{
 
 const name = faker.name.findName()
 const email = faker.internet.email()
-const senha = faker.internet.password(10)
+const password = faker.internet.password(10)
 
 describe('Cadastrar Usuário', () => {
   beforeEach(() => {
@@ -16,8 +16,8 @@ describe('Cadastrar Usuário', () => {
 
     cy.get('#name').type(name)
     cy.get('#email').type(email)
-    cy.get('#password').type(senha)
-    cy.get('#repeatPassword').type(senha)
+    cy.get('#password').type(password)
+    cy.get('#repeatPassword').type(password)
     cy.get('#show-password').click()
     cy.get('#register').click()
   })

@@ -39,18 +39,18 @@ const Settings = () => {
     <CustomFlex direction='column' justify='start' height='auto'>
       <Paper elevation={7}>
         <Flex justify='start' alignItems='start' height='auto'>
-          <CustomList component="nav">
+          <CustomList component='nav'>
             <ListItem button onClick={handleTab(0, setTab)} selected={tab === 0}>
               <ListItemIcon>
                 <AccountCircle />
               </ListItemIcon>
-              <ListItemText primary="Pessoais" />
+              <ListItemText primary='Pessoais' />
             </ListItem>
             <ListItem button onClick={handleTab(1, setTab)} selected={tab === 1}>
               <ListItemIcon>
                 <Lock />
               </ListItemIcon>
-              <ListItemText primary="Senha" />
+              <ListItemText primary='Senha' />
             </ListItem>
           </CustomList>
           {

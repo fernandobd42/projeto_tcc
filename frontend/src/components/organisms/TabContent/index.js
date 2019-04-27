@@ -84,7 +84,7 @@ const TabContent = ({ rows, refetch, showPublishButton, history }) => {
         />
         {
           showPublishButton &&
-          <MuiButton id="novo-rascunho" variant="contained" color="primary" onClick={redirectToNewDraft}>Novo</MuiButton>
+          <MuiButton id='new-draft' variant='contained' color='primary' onClick={redirectToNewDraft}>Novo</MuiButton>
         }
       </CustomFlex>
 

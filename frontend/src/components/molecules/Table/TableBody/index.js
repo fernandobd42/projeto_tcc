@@ -143,7 +143,7 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
                 <Mutation mutation={DELETE_POST}>
                   {(deletePost, { loading: loadingDeletePost }) => (
                   <CustomTableCell key='options' align='right' disabled={loadingPublish || loadingDeletePost}>
-                    <Flex height='auto' justify="flex-end">
+                    <Flex height='auto' justify='flex-end'>
                       { 
                         !item.published && 
                           <CustomButton size='small' disabled={loadingPublish || loadingDeletePost} right={12} btncolor={theme.palette.success[700]} onClick={() =>
