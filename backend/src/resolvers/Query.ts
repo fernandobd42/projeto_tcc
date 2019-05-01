@@ -56,6 +56,11 @@ export const Query = {
   },
 
   async titleExists(parent, { title }, ctx: Context) {
-    return await ctx.prisma.$exists.post({title})
-  }
+    return await ctx.prisma.$exists.post({ title })
+  },
+
+  async draft(parent, { id }, ctx: Context) {
+    const { title } = await ctx.prisma.post({ id })
+    return title;
+  },
 }

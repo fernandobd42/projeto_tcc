@@ -7,6 +7,7 @@ type Query {
   emailAlreadyUsed(email: String): Boolean!,
   token(email: String!, password: String!): String!
   titleExists(title: String): Boolean!
+  draft(id: ID!): String!
 }
 
 type Mutation {

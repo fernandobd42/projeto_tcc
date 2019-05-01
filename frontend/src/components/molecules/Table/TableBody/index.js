@@ -129,7 +129,7 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
           stableSort(tableRows, getSorting(tableOrder, tableOrderBy))
           .slice(currentPage * tableRowsPerPage, currentPage * tableRowsPerPage + tableRowsPerPage)
           .map(item => (
-            <CustomTableRow key={item.allObject.id}>
+            <CustomTableRow key={item.allObject.id} id='table-row'>
               {
                 Object.entries(item)
                 .map(([key, value]) => key !== 'allObject' && 
@@ -154,7 +154,7 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
                             Publicar
                           </CustomButton>
                       }
-                      <CustomButton size='small' disabled={loadingPublish || loadingDeletePost} btncolor={theme.palette.primary.main} right={7} onClick={redirectToEditItem(item.allObject.id)}>
+                      <CustomButton size='small' id={!item.published ? 'editar-rascunho' : 'editar-publicao'} disabled={loadingPublish || loadingDeletePost} btncolor={theme.palette.primary.main} right={7} onClick={redirectToEditItem(item.allObject.id)}>
                         <MuiIconEdit fontSize='small' />
                         Editar
                       </CustomButton>

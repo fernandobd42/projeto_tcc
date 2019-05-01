@@ -98,7 +98,7 @@ const NewEditItem = ({ history }) => {
   if (id.length >= 25) {
     result = useQuery(GET_ONE_ITEM, { variables: { id }})
     mutation = updatePost
-    msgSucesso = 'Item editado com sucesso!'
+    msgSucesso = 'Rascunho editado com sucesso!'
       
     if (!result || result.loading) return <Loading />
     item = result.data.post
