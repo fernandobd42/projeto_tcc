@@ -146,23 +146,42 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
                     <Flex height='auto' justify='flex-end'>
                       { 
                         !item.published && 
-                          <CustomButton size='small' disabled={loadingPublish || loadingDeletePost} right={12} btncolor={theme.palette.success[700]} onClick={() =>
-                            AlertConfirm(
-                              'Rascunho publicado com sucesso.',
-                              publishDeleteItem(publish, item, refetch, 'publicar'),
-                          )}>
+                          <CustomButton 
+                            size='small' 
+                            disabled={loadingPublish || loadingDeletePost} 
+                            right={12} 
+                            btncolor={theme.palette.success[700]} 
+                            onClick={() =>
+                              AlertConfirm(
+                                'Rascunho publicado com sucesso.',
+                                publishDeleteItem(publish, item, refetch, 'publicar'),
+                            )}
+                          >
                             Publicar
                           </CustomButton>
                       }
-                      <CustomButton size='small' id={!item.published ? 'editar-rascunho' : 'editar-publicao'} disabled={loadingPublish || loadingDeletePost} btncolor={theme.palette.primary.main} right={7} onClick={redirectToEditItem(item.allObject.id)}>
+                      <CustomButton 
+                        size='small' 
+                        id={!item.published ? 'editar-rascunho' : 'editar-publicao'} 
+                        disabled={loadingPublish || loadingDeletePost} 
+                        btncolor={theme.palette.primary.main} 
+                        right={7} 
+                        onClick={redirectToEditItem(item.allObject.id)}
+                      >
                         <MuiIconEdit fontSize='small' />
                         Editar
                       </CustomButton>
-                      <CustomButton size='small' disabled={loadingPublish || loadingDeletePost} btncolor={theme.palette.danger[700]} onClick={() => 
-                        AlertConfirm(
-                          'Item excluído com sucesso.',
-                          publishDeleteItem(deletePost, item, refetch, 'excluir'),
-                      )}>
+                      <CustomButton 
+                        size='small' 
+                        id={!item.published ? 'excluir-rascunho' : 'excluir-publicao'} 
+                        disabled={loadingPublish || loadingDeletePost} 
+                        btncolor={theme.palette.danger[700]} 
+                        onClick={() => 
+                          AlertConfirm(
+                            'Item excluído com sucesso.',
+                            publishDeleteItem(deletePost, item, refetch, 'excluir'),
+                        )}
+                      >
                         <MuiIconDelete fontSize='small' />
                         Excluir
                       </CustomButton>
