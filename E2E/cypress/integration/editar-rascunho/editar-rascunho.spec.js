@@ -1,7 +1,7 @@
 import { graphql_api } from '../../../utils/graphql-request.service'
 
 const getDraft = id => `{
-  draft(id: "${id}")
+  titleDraft(id: "${id}")
 }`
 
 const email = 'fernando@gmail.com'
@@ -33,10 +33,11 @@ describe('Editar rascunho', () => {
 
     cy.get('#save-draft').click()
     cy.get('#text-alert').should('contain', 'Rascunho editado com sucesso!')
+    cy.wait(3000)
   })
 
   it('Validar rascunho', async () => {
-    const { draft } = await graphql_api(getDraft(id))
-    expect(draft).to.be.equal(titleEdited)
+    const { titleDraft } = await graphql_api(getDraft(id))
+    expect(titleDraft).to.be.equal(titleEdited)
   })
 })

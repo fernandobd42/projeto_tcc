@@ -32,6 +32,7 @@ describe('Cadastrar rascunho', () => {
     cy.get('#save-draft').click()
     
     cy.get('#text-alert').should('contain', 'Rascunho adicionado com sucesso!')
+    cy.wait(3000)
   })
 
   it('Validar rascunho', async () => {
