@@ -60,7 +60,7 @@ export const Query = {
   },
 
   async titleDraft(parent, { id }, ctx: Context) {
-    const { title } = await ctx.prisma.post({ id })
-    return title;
+    const data = await ctx.prisma.post({ id })
+    return !!data ? data.title : 'Rascunho não existe';
   },
 }
