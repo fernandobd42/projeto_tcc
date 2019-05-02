@@ -12,12 +12,15 @@ const AlertConfirm = (msgsucesso, action) => (
     confirmButtonColor: theme.palette.success[700],
     cancelButtonColor: theme.palette.danger.main,
     showCancelButton: true,
+    customClass: {
+      confirmButton: 'confirm-button'
+    }
   }).then((result) => {
     if (result.value) {
       action()
       Swal.fire({
         title: 'Sucesso!',
-        text: msgsucesso,
+        html: `<div id='text-alert'>${msgsucesso}</div>`,
         type: 'success',
         timer: 5000,
         confirmButtonText: 'Fechar',

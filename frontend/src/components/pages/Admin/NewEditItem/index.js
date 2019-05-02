@@ -152,7 +152,7 @@ const NewEditItem = ({ history }) => {
                   {id.length >= 25 ? 'Editar' : 'Adicionar'}
                 </CustomButton>
                 <Footer>
-                  <CustomButton type='button' color='primary' onClick={redirectToPublications}>
+                  <CustomButton id='cancel' type='button' color='primary' onClick={redirectToPublications}>
                     Voltar
                   </CustomButton>
                 </Footer>
