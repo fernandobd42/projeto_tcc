@@ -148,6 +148,7 @@ const TableBody = ({ tableRows, currentPage, tableOrder, tableOrderBy, tableRows
                         !item.published && 
                           <CustomButton 
                             size='small' 
+                            id='publicar-rascunho' 
                             disabled={loadingPublish || loadingDeletePost} 
                             right={12} 
                             btncolor={theme.palette.success[700]} 
