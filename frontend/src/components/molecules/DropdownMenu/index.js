@@ -71,6 +71,7 @@ const DropdownMenu = ({ history }) => {
   return (
     <Fragment>  
       <MuiButton 
+        id='user-name'
         onClick={profileToggle(openMenu, setOpenMenu)} 
         buttonRef={setProfileAnchorEl}
       >
@@ -88,7 +89,7 @@ const DropdownMenu = ({ history }) => {
             <MuiPaper>
               <MuiClickAwayListener onClickAway={closePopper()}>
                 <MuiMenuList>
-                  <MuiMenuItem onClick={profileToggle(openMenu, setOpenMenu, redirectToSettings)}>Configurações</MuiMenuItem>
+                  <MuiMenuItem id='settings' onClick={profileToggle(openMenu, setOpenMenu, redirectToSettings)}>Configurações</MuiMenuItem>
                   <MuiMenuItem onClick={logout(setUser, redirectToLogin)}>Sair</MuiMenuItem>
                 </MuiMenuList>
               </MuiClickAwayListener>

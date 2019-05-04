@@ -6,6 +6,7 @@ type Query {
   me: User!
   emailAlreadyUsed(email: String): Boolean!,
   token(email: String!, password: String!): String!
+  user(email: String!, password: String!): User!
   titleExists(title: String): Boolean!
   titleDraft(id: ID!): String!
 }

@@ -51,8 +51,12 @@ export const Query = {
 
   async token(parent, { email, password }, ctx: Context) {
     const user = await validateUser(ctx, email, password)
-
     return jwt.sign({ userId: user.id }, process.env.APP_SECRET)
+  },
+
+  async user(parent, { email, password }, ctx: Context) {
+    const user = await validateUser(ctx, email, password)
+    return user
   },
 
   async titleExists(parent, { title }, ctx: Context) {
