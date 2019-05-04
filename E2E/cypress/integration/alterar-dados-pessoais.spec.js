@@ -12,7 +12,7 @@ const getUser = (email, password) => `{
 const email = 'fernando@gmail.com'
 const password = '%fernando%123'
 const newEmail = faker.internet.email()
-const wrongPassword = faker.internet.password()
+const wrongPassword = faker.internet.password(12)
 let name, newName;
 
 describe('Alterar dados pessoais', () => {
@@ -59,6 +59,13 @@ describe('Alterar dados pessoais', () => {
   })
 
   it('Validar alteracao', async () => {
+    try {
+      await graphql_api(getUser(email, password))
+    } catch (error) {
+      expect(error.response.errors[0].message).to.be
+        .equal(`No such user found for email: ${email}`)
+    }
+
     const { user } = await graphql_api(getUser(newEmail, password))
     expect(user.name).to.be.equal(newName)
     expect(user.email).to.be.equal(newEmail)
@@ -93,6 +100,13 @@ describe('Voltar dados pessoais', () => {
   })
 
   it('Validar alteracao', async () => {
+    try {
+      await graphql_api(getUser(newEmail, password))
+    } catch (error) {
+      expect(error.response.errors[0].message).to.be
+        .equal(`No such user found for email: ${newEmail}`)
+    }
+
     const { user } = await graphql_api(getUser(email, password))
     expect(user.name).to.be.equal(name)
     expect(user.email).to.be.equal(email)

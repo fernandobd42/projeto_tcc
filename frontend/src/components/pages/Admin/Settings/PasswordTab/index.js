@@ -120,6 +120,7 @@ const PasswordTab = () => {
       <Form>
         <FormFields>
           <FormikField
+            id='new-password'
             required
             name='newPassword'
             type={typePassword}
@@ -128,13 +129,14 @@ const PasswordTab = () => {
             component={InputField}
             endIcon={
               <MuiTooltip title={tooltipPassword} aria-label={tooltipPassword}>
-                <MuiIconButton onClick={() => handlingTypePassword(typePassword, setTypePassword, setTooltipPassword)}>
+                <MuiIconButton id='show-password' onClick={() => handlingTypePassword(typePassword, setTypePassword, setTooltipPassword)}>
                   <LockIconComponent type={typePassword} />
                 </MuiIconButton>
               </MuiTooltip>
             }
           />
           <FormikField
+            id='confirm-new-password'
             required
             name='confirmNewPassword'
             type={typePassword}
@@ -143,6 +145,7 @@ const PasswordTab = () => {
             component={InputField}
           />
           <FormikField
+            id='current-password'
             required
             name='currentPassword'
             type={typePassword}
@@ -151,7 +154,7 @@ const PasswordTab = () => {
             component={InputField}
           />
         </FormFields>
-        <CustomButton type='submit' variant='outlined' color='primary' disabled={loading} onClick={onSubmit}>
+        <CustomButton id='save-password' type='submit' variant='outlined' color='primary' disabled={loading} onClick={onSubmit}>
           Alterar
         </CustomButton>
       </Form>

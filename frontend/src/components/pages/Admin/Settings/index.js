@@ -46,7 +46,7 @@ const Settings = () => {
               </ListItemIcon>
               <ListItemText primary='Pessoais' />
             </ListItem>
-            <ListItem button onClick={handleTab(1, setTab)} selected={tab === 1}>
+            <ListItem id='change-password' button onClick={handleTab(1, setTab)} selected={tab === 1}>
               <ListItemIcon>
                 <Lock />
               </ListItemIcon>
