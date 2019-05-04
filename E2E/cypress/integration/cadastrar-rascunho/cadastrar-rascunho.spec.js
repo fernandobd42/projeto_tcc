@@ -9,7 +9,7 @@ const titleAlreadyExists = title => `{
 const email = 'fernando@gmail.com'
 const password = '%fernando%123'
 const title = faker.lorem.words(4)
-const content = faker.lorem.paragraphs(3)
+const content = faker.lorem.paragraphs(2)
 
 describe('Cadastrar rascunho', () => {
   before(() => {
@@ -21,10 +21,10 @@ describe('Cadastrar rascunho', () => {
     cy.wait(5000)
     cy.get('#publications').click()
     cy.wait(3000)
-    cy.get('#new-draft').click()
   })
   
   it('Novo rascunho', () => {
+    cy.get('#new-draft').click()
     cy.location("pathname").should("eq", "/admin/newDraft")
     
     cy.get('#title').type(title)
@@ -32,6 +32,15 @@ describe('Cadastrar rascunho', () => {
     cy.get('#save-draft').click()
     
     cy.get('#text-alert').should('contain', 'Rascunho adicionado com sucesso!')
+    cy.wait(3000)
+
+    cy.get('#new-draft').click()
+
+    cy.get('#title').type(title)
+    cy.get('#content').type(content)
+    cy.get('#save-draft').click()
+    
+    cy.get('#text-alert').should('contain', 'Já existe um rascunho com este título, tente outro.')
     cy.wait(3000)
   })
 
