@@ -83,6 +83,10 @@ const submit = (mutation, redirectToPublications, msgSucesso) => async ({ id, ti
     if (!!error.networkError) {
       Alert('error', 'Error', 'Servidor fora do ar!')
     }
+
+    if (error.message.includes('Already exists a draft with this title, try other.')) {
+      Alert('error', 'Error', 'Já existe um rascunho com este título, tente outro.')
+    }
   }
   
   setSubmitting(false)

@@ -3,6 +3,12 @@ import { getUserId, Context } from '../../utils'
 export const post = {
   async createDraft(parent, { title, content }, ctx: Context, info) {
     const userId = getUserId(ctx)
+    const titleExists = await ctx.prisma.$exists.post({ title })
+
+    if (titleExists) {
+      throw new Error(`Already exists a draft with this title, try other.`)
+    }
+  
     return ctx.prisma.createPost({
       title,
       content,
