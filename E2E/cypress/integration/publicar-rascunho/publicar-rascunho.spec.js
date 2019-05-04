@@ -8,7 +8,7 @@ const getPost = id => `{
 
 const email = 'fernando@gmail.com'
 const password = '%fernando%123'
-let id;
+let id
 
 describe('Publicar rascunho', () => {
   before(() => {

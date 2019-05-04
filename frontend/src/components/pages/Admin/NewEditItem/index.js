@@ -94,8 +94,8 @@ const submit = (mutation, redirectToPublications, msgSucesso) => async ({ id, ti
 
 const NewEditItem = ({ history }) => {
   const redirectToPublications= () => history.push('/admin/publications')
-  const createDraft = useMutation(CREATE_DRAFT);
-  const updatePost = useMutation(UPDATE_ITEM);
+  const createDraft = useMutation(CREATE_DRAFT)
+  const updatePost = useMutation(UPDATE_ITEM)
   const id = history.location.pathname.split('/').pop()
   let result, item, mutation, msgSucesso
 

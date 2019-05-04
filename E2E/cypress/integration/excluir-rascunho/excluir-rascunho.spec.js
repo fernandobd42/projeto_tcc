@@ -6,7 +6,7 @@ const getDraft = id => `{
 
 const email = 'fernando@gmail.com'
 const password = '%fernando%123'
-let id;
+let id
 
 describe('Excluir rascunho', () => {
   before(() => {

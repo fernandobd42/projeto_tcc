@@ -4,7 +4,7 @@ import { graphql_api } from '../../../utils/graphql-request.service'
 
 const emailUsed = email => `{
   emailAlreadyUsed(email: "${email}")
-}`;
+}`
 
 const name = faker.name.findName()
 const email = faker.internet.email()

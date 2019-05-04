@@ -10,7 +10,7 @@ import MuiTab from '@material-ui/core/Tab'
 
 import TabContainer from 'components/atoms/TabContainer'
 import DraftsTab from './DraftsTab'
-import PostsTab from './PostsTab';
+import PostsTab from './PostsTab'
 
 const CustomSwipeableViews = styled(SwipeableViews)`
   && {
@@ -23,7 +23,7 @@ const handleChange = setTabIndex => (_, value) => {
 }
 
 const handleChangeIndex = setTabIndex => index => {
-  setTabIndex(index);
+  setTabIndex(index)
 }
 
 const Tabs = () => {

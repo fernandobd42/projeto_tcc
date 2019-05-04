@@ -6,7 +6,7 @@ const getDraft = id => `{
 
 const email = 'fernando@gmail.com'
 const password = '%fernando%123'
-let titleEdited, id;
+let titleEdited, id
 
 describe('Editar rascunho', () => {
   before(() => {
@@ -27,7 +27,7 @@ describe('Editar rascunho', () => {
     cy.get('#title').type(' editado')
     cy.get('input[name="title"]')
       .invoke('val')
-      .then(text => titleEdited = text);
+      .then(text => titleEdited = text)
     cy.window()
       .then(win => id = win.location.href.split('/').pop())
 
