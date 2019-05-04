@@ -1,6 +1,6 @@
 import faker from 'faker'
 
-import { graphql_api } from '../../../utils/graphql-request.service'
+import { graphql_api } from '../../utils/graphql-request.service'
 
 const titleAlreadyExists = title => `{
   titleExists(title: "${title}")

@@ -1,16 +1,14 @@
-import { graphql_api } from '../../../utils/graphql-request.service'
+import { graphql_api } from '../../utils/graphql-request.service'
 
-const getPost = id => `{
-  post(id: "${id}") {
-    published
-  }
+const getDraft = id => `{
+  titleDraft(id: "${id}")
 }`
 
 const email = 'fernando@gmail.com'
 const password = '%fernando%123'
 let id
 
-describe('Publicar rascunho', () => {
+describe('Excluir rascunho', () => {
   before(() => {
     cy.visit('http://localhost:3000/auth/login')
     cy.get('#email').type(email)
@@ -27,16 +25,16 @@ describe('Publicar rascunho', () => {
     cy.get('#cancel').click()
   })
   
-  it('Publicando rascunho', () => {
-    cy.get('#table-row:first-child #publicar-rascunho').click()
+  it('Excluindo rascunho', () => {
+    cy.get('#table-row:first-child #excluir-rascunho').click()
     cy.wait(3000)
     cy.get('.confirm-button').click()
-    cy.get('#text-alert').should('contain', 'Rascunho publicado com sucesso.')
+    cy.get('#text-alert').should('contain', 'Item excluído com sucesso.')
     cy.wait(3000)
   })
 
-  it('Validar publicação', async () => {
-    const { post } = await graphql_api(getPost(id))
-    expect(post.published).to.be.true
+  it('Validar rascunho', async () => {
+    const { titleDraft } = await graphql_api(getDraft(id))
+    expect(titleDraft).to.be.equal('Rascunho não existe')
   })
 })

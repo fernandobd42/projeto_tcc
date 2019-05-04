@@ -1,4 +1,4 @@
-import { graphql_api } from '../../../utils/graphql-request.service'
+import { graphql_api } from '../../utils/graphql-request.service'
 
 const getDraft = id => `{
   titleDraft(id: "${id}")
@@ -6,9 +6,9 @@ const getDraft = id => `{
 
 const email = 'fernando@gmail.com'
 const password = '%fernando%123'
-let id
+let titleEdited, id
 
-describe('Excluir rascunho', () => {
+describe('Editar rascunho', () => {
   before(() => {
     cy.visit('http://localhost:3000/auth/login')
     cy.get('#email').type(email)
@@ -19,22 +19,25 @@ describe('Excluir rascunho', () => {
     cy.get('#publications').click()
     cy.wait(3000)
     cy.get('#table-row:first-child #editar-rascunho').click()
-    cy.window()
-      .then(win => id = win.location.href.split('/').pop())
-    cy.wait(3000)
-    cy.get('#cancel').click()
   })
   
-  it('Excluindo rascunho', () => {
-    cy.get('#table-row:first-child #excluir-rascunho').click()
-    cy.wait(3000)
-    cy.get('.confirm-button').click()
-    cy.get('#text-alert').should('contain', 'Item excluído com sucesso.')
+  it('Editando rascunho', () => {
+    cy.location("pathname").should("contain", "/admin/editItem")
+    
+    cy.get('#title').type(' editado')
+    cy.get('input[name="title"]')
+      .invoke('val')
+      .then(text => titleEdited = text)
+    cy.window()
+      .then(win => id = win.location.href.split('/').pop())
+
+    cy.get('#save-draft').click()
+    cy.get('#text-alert').should('contain', 'Rascunho editado com sucesso!')
     cy.wait(3000)
   })
 
   it('Validar rascunho', async () => {
     const { titleDraft } = await graphql_api(getDraft(id))
-    expect(titleDraft).to.be.equal('Rascunho não existe')
+    expect(titleDraft).to.be.equal(titleEdited)
   })
 })
