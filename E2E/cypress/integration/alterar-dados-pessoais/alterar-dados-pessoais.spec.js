@@ -23,7 +23,7 @@ describe('Alterar dados pessoais', () => {
     cy.get('#show-password').click()
     cy.get('#login').click()
     cy.wait(5000)
-    cy.get('#user-name').click()
+    cy.get('#dropdown').click()
     cy.wait(1000)
     cy.get('#settings').click()
     cy.wait(1000)
@@ -65,7 +65,7 @@ describe('Alterar dados pessoais', () => {
   })
 })
 
-describe('Voltar dados pessoas', () => {
+describe('Voltar dados pessoais', () => {
   before(() => {
     cy.visit('http://localhost:3000/auth/login')
     cy.get('#email').type(newEmail)
@@ -73,7 +73,7 @@ describe('Voltar dados pessoas', () => {
     cy.get('#show-password').click()
     cy.get('#login').click()
     cy.wait(5000)
-    cy.get('#user-name').click()
+    cy.get('#dropdown').click()
     cy.wait(1000)
     cy.get('#settings').click()
     cy.wait(1000)

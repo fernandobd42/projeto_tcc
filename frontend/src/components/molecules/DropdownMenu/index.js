@@ -71,7 +71,7 @@ const DropdownMenu = ({ history }) => {
   return (
     <Fragment>  
       <MuiButton 
-        id='user-name'
+        id='dropdown'
         onClick={profileToggle(openMenu, setOpenMenu)} 
         buttonRef={setProfileAnchorEl}
       >
