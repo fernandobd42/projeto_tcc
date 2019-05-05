@@ -1,0 +1,29 @@
+{
+  "name": "run-dev-environment",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-frontend-dependencies": "cd ./frontend && npm install",
+    "install-backend-dependencies": "cd ./backend && npm install",
+    "install-E2E-dependencies": "cd ./E2E && npm install",
+    "frontend": "cd ./frontend && npm start",
+    "backend": "cd ./backend && npm start",
+    "E2E": "cd ./E2E && npm start",
+    "install": "npm run install-frontend-dependencies && npm run install-backend-dependencies && npm run install-E2E-dependencies",
+    "start": "concurrently \"npm run frontend\" \"npm run backend\" \"npm run E2E\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fernandobd42/projeto_tcc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fernandobd42/projeto_tcc/issues"
+  },
+  "homepage": "https://github.com/fernandobd42/projeto_tcc#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
