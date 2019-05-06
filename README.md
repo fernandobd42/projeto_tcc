@@ -4,7 +4,7 @@
 
 
 ```bash
-npm run install
+npm runinstall-dependencies
 ```
 
 ## to run these 3 projects at once

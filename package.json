@@ -10,7 +10,7 @@
     "frontend": "cd ./frontend && npm start",
     "backend": "cd ./backend && npm start",
     "E2E": "cd ./E2E && npm start",
-    "install": "npm run install-frontend-dependencies && npm run install-backend-dependencies && npm run install-E2E-dependencies && npm install",
+    "install-dependencies": "npm run install-frontend-dependencies && npm run install-backend-dependencies && npm run install-E2E-dependencies && npm install",
     "start": "concurrently \"npm run frontend\" \"npm run backend\" \"npm run E2E\""
   },
   "repository": {
