@@ -1,3 +1,5 @@
+import faker from 'faker'
+
 import { graphql_api } from '../../utils/graphql-request.service'
 
 const getDraft = id => `{
@@ -6,6 +8,8 @@ const getDraft = id => `{
 
 const email = 'fernando@gmail.com'
 const password = '%fernando%123'
+const title = faker.lorem.words(4)
+const content = faker.lorem.paragraphs(2)
 let id
 
 describe('Excluir rascunho', () => {
@@ -18,6 +22,13 @@ describe('Excluir rascunho', () => {
     cy.wait(5000)
     cy.get('#publications').click()
     cy.wait(3000)
+
+    cy.get('#new-draft').click()
+    cy.get('#title').type(title)
+    cy.get('#content').type(content)
+    cy.get('#save-draft').click()
+    cy.wait(3000)
+    
     cy.get('#table-row:first-child #editar-rascunho').click()
     cy.window()
       .then(win => id = win.location.href.split('/').pop())
