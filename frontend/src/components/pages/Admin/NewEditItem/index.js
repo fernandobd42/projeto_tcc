@@ -97,14 +97,15 @@ const NewEditItem = ({ history }) => {
   const createDraft = useMutation(CREATE_DRAFT)
   const updatePost = useMutation(UPDATE_ITEM)
   const id = history.location.pathname.split('/').pop()
-  let result, item, mutation, msgSucesso
+  let item, mutation, msgSucesso
+  const result = useQuery(GET_ONE_ITEM, { variables: { id }})
 
-  if (id.length >= 25) {
-    result = useQuery(GET_ONE_ITEM, { variables: { id }})
+  if (!result || result.loading) return <Loading />
+  
+  if (!!result && !!result.data && !!result.data.post) {
     mutation = updatePost
     msgSucesso = 'Rascunho editado com sucesso!'
       
-    if (!result || result.loading) return <Loading />
     item = result.data.post
   } else {
     mutation = createDraft
