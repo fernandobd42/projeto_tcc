@@ -33,7 +33,7 @@ const Feed = () => {
       refetch()
       setFetchData(false)
     }
-  }, [data])
+  }, [data, refetch, fetchData])
 
   if (loading || !rows) {
     return <Loading/>

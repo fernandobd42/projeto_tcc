@@ -22,10 +22,10 @@ const PostsTab = ({ tabIndex }) => {
       formatObjectRows(data.posts, setRows)
     }
 
-    if (tabIndex === 1) {
+    if (tabIndex === 1 && !rows) {
       refetch()
     }
-  }, [tabIndex, data])
+  }, [tabIndex, data, refetch, rows])
 
   if (loading || !rows) {
     return <Loading height='618px' />

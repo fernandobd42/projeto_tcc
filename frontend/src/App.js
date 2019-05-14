@@ -19,7 +19,7 @@ const App = () => {
     .query({ query: USER })
     .then(({ data }) => setUser(data.me))
     .catch(() => setUser(null))
-  }, [])
+  }, [setUser])
   
   if (user === undefined) {
     return <Loading />
