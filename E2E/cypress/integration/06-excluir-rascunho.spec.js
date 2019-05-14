@@ -6,20 +6,13 @@ const getDraft = id => `{
   titleDraft(id: "${id}")
 }`
 
-const email = 'fernando@gmail.com'
-const password = '%fernando%123'
 const title = faker.lorem.words(4)
 const content = faker.lorem.paragraphs(2)
 let id
 
 describe('Excluir rascunho', () => {
   before(() => {
-    cy.visit('http://localhost:3000/auth/login')
-    cy.get('#email').type(email)
-    cy.get('#password').type(password)
-    cy.get('#show-password').click()
-    cy.get('#login').click()
-    cy.wait(5000)
+    cy.login()
     cy.get('#publications').click()
     cy.wait(3000)
 

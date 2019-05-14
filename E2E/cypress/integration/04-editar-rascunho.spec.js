@@ -4,18 +4,11 @@ const getDraft = id => `{
   titleDraft(id: "${id}")
 }`
 
-const email = 'fernando@gmail.com'
-const password = '%fernando%123'
 let titleEdited, id
 
 describe('Editar rascunho', () => {
   before(() => {
-    cy.visit('http://localhost:3000/auth/login')
-    cy.get('#email').type(email)
-    cy.get('#password').type(password)
-    cy.get('#show-password').click()
-    cy.get('#login').click()
-    cy.wait(5000)
+    cy.login()
     cy.get('#publications').click()
     cy.wait(3000)
     cy.get('#table-row:first-child #editar-rascunho').click()

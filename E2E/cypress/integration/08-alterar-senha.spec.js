@@ -14,12 +14,7 @@ const newPassword = faker.internet.password(12)
 
 describe('Alterar senha', () => {
   before(() => {
-    cy.visit('http://localhost:3000/auth/login')
-    cy.get('#email').type(email)
-    cy.get('#password').type(password)
-    cy.get('#show-password').click()
-    cy.get('#login').click()
-    cy.wait(5000)
+    cy.login()
     cy.get('#dropdown').click()
     cy.wait(1000)
     cy.get('#settings').click()
@@ -59,12 +54,7 @@ describe('Alterar senha', () => {
 
 describe('Voltar senha', () => {
   before(() => {
-    cy.visit('http://localhost:3000/auth/login')
-    cy.get('#email').type(email)
-    cy.get('#password').type(newPassword)
-    cy.get('#show-password').click()
-    cy.get('#login').click()
-    cy.wait(5000)
+    cy.login(email, newPassword)
     cy.get('#dropdown').click()
     cy.wait(1000)
     cy.get('#settings').click()

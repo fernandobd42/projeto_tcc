@@ -17,12 +17,7 @@ let name, newName;
 
 describe('Alterar dados pessoais', () => {
   before(() => {
-    cy.visit('http://localhost:3000/auth/login')
-    cy.get('#email').type(email)
-    cy.get('#password').type(password)
-    cy.get('#show-password').click()
-    cy.get('#login').click()
-    cy.wait(5000)
+    cy.login()
     cy.get('#dropdown').click()
     cy.wait(1000)
     cy.get('#settings').click()
@@ -74,12 +69,7 @@ describe('Alterar dados pessoais', () => {
 
 describe('Voltar dados pessoais', () => {
   before(() => {
-    cy.visit('http://localhost:3000/auth/login')
-    cy.get('#email').type(newEmail)
-    cy.get('#password').type(password)
-    cy.get('#show-password').click()
-    cy.get('#login').click()
-    cy.wait(5000)
+    cy.login(newEmail)
     cy.get('#dropdown').click()
     cy.wait(1000)
     cy.get('#settings').click()
