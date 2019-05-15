@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useMutation } from 'react-apollo-hooks'
 import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import theme from 'app/theme'
 import UPDATE_USER from './Mutation'
-import { ContextAPI } from 'app/store'
+import { UserContextAPI } from 'app/store'
 
 import MuiButton from '@material-ui/core/Button'
 import MuiIconButton from '@material-ui/core/IconButton'
@@ -108,7 +108,7 @@ const LockIconComponent = ({ type }) => {
 }
 
 const PersonalTab = () => {
-  const [user, setUser] = useContext(ContextAPI)
+  const {user, setUser} = UserContextAPI()
   const updateUser = useMutation(UPDATE_USER)
   const [loading, setLoading] = useState(false)
   const [typePassword, setTypePassword] = useState('password')

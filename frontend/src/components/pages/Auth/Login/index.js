@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Mutation } from 'react-apollo'
 import { Formik, Form as FormikForm, Field as FormikField } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 
 import theme from 'app/theme'
-import { ContextAPI, setToken } from 'app/store'
+import { UserContextAPI, setToken } from 'app/store'
 import LOGIN from './Mutation'
 
 import MuiPaper from '@material-ui/core/Paper'
@@ -138,7 +138,7 @@ const LockIconComponent = ({ type }) => {
 const Login = ({ history }) => {
   const [typePassword, setTypePassword] = useState('password')
   const [tooltipPassword, setTooltipPassword] = useState('Mostrar senha')
-  const [, setUser] = useContext(ContextAPI)
+  const {setUser} = UserContextAPI()
   const redirectToRegister = () => history.push('/auth/register')
   const redirectToFeed = () => history.push('/admin/feed')
 

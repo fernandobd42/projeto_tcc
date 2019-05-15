@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Switch, Route, Redirect} from 'react-router-dom'
 
 import apolloClient from 'app/apolloClient'
-import { ContextAPI } from 'app/store'
+import { UserContextAPI } from 'app/store'
 import USER from './Query'
 
 import Loading from 'components/atoms/Loading'
@@ -12,7 +12,7 @@ const AdminPage = React.lazy(() => import('components/pages/Admin'))
 const NotFoundPage = React.lazy(() => import('components/pages/NotFound'))
 
 const App = () => {
-  const [user, setUser] = useContext(ContextAPI)
+  const {user, setUser} = UserContextAPI()
   
   useEffect(() => {
     apolloClient

@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 
-import { ContextAPI } from 'app/store'
+import { UserContextAPI } from 'app/store'
 
 const ProtectedRoute = ({ component: Component }) => {
-  const [user] = useContext(ContextAPI)
-
+  const {user} = UserContextAPI()
   return (
     <Route render={props =>
       !user

@@ -1,9 +1,9 @@
-import React, { useState, useContext, Fragment } from 'react'
+import React, { useState, Fragment } from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
 import theme from 'app/theme'
-import { ContextAPI, setToken } from 'app/store'
+import { UserContextAPI, setToken } from 'app/store'
 
 import MuiButton from '@material-ui/core/Button'
 import MuiPopper from '@material-ui/core/Popper'
@@ -62,7 +62,7 @@ const DropdownMenu = ({ history }) => {
   const [openMenu, setOpenMenu] = useState(false)
   const [profileAnchorEl, setProfileAnchorEl] = useState(null)
   
-  const [user, setUser] = useContext(ContextAPI)
+  const {user, setUser} = UserContextAPI()
 
   const closePopper = () => profileClose(profileAnchorEl, setOpenMenu)
   const redirectToLogin = () => history.push('/auth/login')

@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import { ContextAPI } from 'app/store'
+import { UserContextAPI } from 'app/store'
 
 const LoginPage = React.lazy(() => import('components/pages/Auth/Login'))
 const RegisterPage = React.lazy(() => import('components/pages/Auth/Register'))
 const NotFoundPage = React.lazy(() => import('components/pages/NotFound'))
 
 const Auth = ({ history }) => {
-  const [user] = useContext(ContextAPI)
+  const {user} = UserContextAPI()
   const redirectToAdmin = () => history.push('/admin')
 
   if (!!user) {
