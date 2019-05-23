@@ -1,6 +1,7 @@
 import faker from 'faker'
 
 import { graphql_api } from '../../utils/graphql-request.service'
+import { email, password} from './../../utils/user-constants'
 
 const getUser = (email, password) => `{
   user(email: "${email}", password: "${password}") {
@@ -8,8 +9,6 @@ const getUser = (email, password) => `{
   }
 }`
 
-const email = 'fernando@gmail.com'
-const password = '%fernando%123'
 const newPassword = faker.internet.password(12)
 
 describe('Alterar senha', () => {

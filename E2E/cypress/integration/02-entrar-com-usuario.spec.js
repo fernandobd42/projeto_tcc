@@ -1,14 +1,13 @@
 import faker from 'faker'
 
 import { graphql_api } from '../../utils/graphql-request.service'
+import { email, password} from './../../utils/user-constants'
 
 const getToken = (email, password) => `{
   token(email: "${email}", password: "${password}")
 }`
 
-const email = 'fernando@gmail.com'
 const emailInvalid = faker.internet.email()
-const password = '%fernando%123'
 const passwordInvalid = faker.internet.password(10)
 
 describe('Entrar com Usuário', () => {

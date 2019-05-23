@@ -1,7 +1,9 @@
-Cypress.Commands.add('login', (email = 'fernando@gmail.com', password = "%fernando%123") => {
+import { email, password} from './../../utils/user-constants'
+
+Cypress.Commands.add('login', (userEmail = email, userPassword = password) => {
   cy.visit('http://localhost:3000/auth/login')
-  cy.get('#email').type(email)
-  cy.get('#password').type(password)
+  cy.get('#email').type(userEmail)
+  cy.get('#password').type(userPassword)
   cy.get('#show-password').click()
   cy.get('#login').click()
   cy.wait(5000)
