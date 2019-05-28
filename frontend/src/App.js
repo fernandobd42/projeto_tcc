@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Switch, Route, Redirect} from 'react-router-dom'
 
 import apolloClient from 'app/apolloClient'
-import { UserContextAPI } from 'app/store'
+import { UserContextAPI, getToken } from 'app/store'
 import USER from './Query'
 
 import Loading from 'components/atoms/Loading'
@@ -15,10 +15,14 @@ const App = () => {
   const {user, setUser} = UserContextAPI()
   
   useEffect(() => {
-    apolloClient
-    .query({ query: USER })
-    .then(({ data }) => setUser(data.me))
-    .catch(() => setUser(null))
+    if (getToken().length > 154) {
+      apolloClient
+      .query({ query: USER })
+      .then(({ data }) => setUser(data.me))
+      .catch(() => setUser(null))
+    } else {
+      setUser(null)
+    }
   }, [setUser])
   
   if (user === undefined) {
