@@ -15,7 +15,7 @@ const App = () => {
   const {user, setUser} = UserContextAPI()
   
   useEffect(() => {
-    if (getToken().length > 154) {
+    if (!!getToken() && getToken().length > 154) {
       apolloClient
       .query({ query: USER })
       .then(({ data }) => setUser(data.me))
