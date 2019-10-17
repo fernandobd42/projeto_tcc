@@ -21,11 +21,11 @@ const PostsTab = ({ tabIndex }) => {
     if (!!Object.keys(data).length) {
       formatObjectRows(data.posts, setRows)
     }
+  }, [data, rows])
 
-    if (tabIndex === 1 && !rows) {
-      refetch()
-    }
-  }, [tabIndex, data, refetch, rows])
+  useEffect(() => {
+    refetch()
+  }, [tabIndex])
 
   if (loading || !rows) {
     return <Loading height='618px' />

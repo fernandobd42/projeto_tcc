@@ -22,10 +22,11 @@ const DraftsTab = ({ tabIndex }) => {
       formatObjectRows(data.drafts, setRows)
     }
 
-    if (tabIndex === 0 && !rows) {
-      refetch()
-    }
-  }, [tabIndex, data, refetch, rows])
+  }, [data, rows])
+
+  useEffect(() => {
+    refetch()
+  }, [tabIndex])
 
   if (loading || !rows) {
     return <Loading height='618px'/>

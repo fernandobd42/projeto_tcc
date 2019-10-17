@@ -8,7 +8,7 @@ import Tabs from './Tabs'
 
 const CustomFlex = styled(Flex)`
   && {
-   max-height: 100vh;
+    max-height: 100vh;
   }
 `
 
