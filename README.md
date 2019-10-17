@@ -1,13 +1,12 @@
-# projeto_tcc
+# projeto tcc
 
-## to install dependencies of these 3 projects at once
-
+## para instalar dependências nesses 3 projetos de uma só vez
 
 ```bash
 npm run install-dependencies
 ```
 
-## to run these 3 projects at once
+## para executar esses 3 projetos de uma só vez
 
 
 ```bash
